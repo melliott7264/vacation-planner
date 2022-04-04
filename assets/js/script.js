@@ -1,5 +1,7 @@
+
+
 // function to retrieve weather data required for application
-var fetchWeatherData = function(lat, lon, loc, units) {
+var fetchWeatherData = function(lat, lon, loc, units, date) {
 
     var apiKey = "12afd4d18f110d35ce3359c3e1919c84";
     var forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=" + units + "&appid=" + apiKey;
@@ -9,8 +11,9 @@ var fetchWeatherData = function(lat, lon, loc, units) {
         if (response.ok) {
             response.json().then(function(data){
 
-            console.log(loc, data);
-        });
+                console.log(loc, date, data);
+
+            });
         }  else {
             alert("Error: OpenWeather User Not Found  " + response.status);
         }
@@ -22,9 +25,8 @@ var fetchWeatherData = function(lat, lon, loc, units) {
 };
 
 // function to get location data for city entered in search box
-var fetchLocationData = function(location) {
+var fetchLocationData = function(location, date) {
 
-   
     var apiKey =  "f3daf114f7ab984d1e977c7fa53afcf7";
     var locationUrl = "https://api.positionstack.com/v1/forward?access_key=" + apiKey + "&query=" + location + "&output=json";
 
@@ -34,14 +36,18 @@ var fetchLocationData = function(location) {
             response.json().then(function(data){
 
                 console.log(data);
+                     
+                var returnDataObj = {
+                    lat: data.data[0].latitude,
+                    lon: data.data[0].longitude,
+                    loc: location
+                    };
 
-            var lat =data.data[0].latitude;
-            var lon =data.data[0].longitude;
-            var loc = location;
-       
-            // call fetch of weather data for current city
-            fetchWeatherData(lat, lon, loc, "imperial");
-        });
+                fetchWeatherData(data.data[0].latitude, data.data[0].longitude, location, "imperial", date);    
+                
+            });
+            
+
         }  else {
             alert("Error: positionstack User Not Found  " + response.status);
         }
@@ -52,6 +58,22 @@ var fetchLocationData = function(location) {
     });
     
 };
+
+var returnForecastData = function(location, date) {
+
+    fetchLocationData(location, date);
+    
+
+    // var returnForecastDataArray = fetchWeatherData(returnLocationDataObj.lat, returnLocationDataObj.lon, returnLocationDataObj.loc, "imperial");
+
+    // console.log (returnForecastDataArray);
+
+
+};
+
+var currentDate = dayjs(new Date());
+
+returnForecastData("Mechanicsville,VA", currentDate);
 
 // ************************************** Start of pseudocode *****************************************
 // (name/date input function) get vacation name and start/end dates for trip.  Use a date picker for the dates.  Need to add a Build Trip button to process entered values.
@@ -87,6 +109,4 @@ var fetchLocationData = function(location) {
     // Call the day block display function
 
 
-
-fetchLocationData("Richmond,VA");
 
