@@ -1,4 +1,3 @@
-
 // function to retrieve weather data required for application
 var fetchWeatherData = function(lat, lon, loc, units) {
 
@@ -54,4 +53,40 @@ var fetchLocationData = function(location) {
     
 };
 
+// ************************************** Start of pseudocode *****************************************
+// (function) get vacation name and start/end dates for trip.  Use a date picker for the dates.  Need to add a Build Trip button to process entered values.
+    // On click of the build trip button, validate that the end date is within 16 days of current date.  If not, display a modal with an error msg 
+        // and a box to enter another date.   Use a date picker.  Suggest that this modal have fields for both the start/end dates and populated
+        // with the dates we have, if any.
+    // If a vacation name is entered without start/end dates, check to see if it is already in local storage.  If so,  retrieve the start/end dates.
+        // Otherwise display a model box with an error msg to enter dates.   May be the same box as above.
+
+// (function) If it doesn't already exist, create an object with the vacation name and save that object with the start/end dates to local storage
+
+// Use trip dates in a loop to:
+    // (two existing functions) fetch the weather (will have to change endpoint to get 16 day forecast) for the location and 
+        // (function) extract the correct day's weather from data returned (relative to current day)
+    // (function) display a block for each day in the trip including the date, the location if we have one yet, an event description if we have one, 
+        //the weather for that date if we have a loation, an edit button and a map icon.
+        // Display code should be preceeded by code to clear any existing day blocks.
+        // Create/recreate day blocks
+            // write date
+            // write activity description 
+            // write weather data to include:
+                // weather icon
+                // high and low temperature
+                // humidity
+                // UVI
+                // sunrise and sunset
+            // map icon/link
+            // edit button
+
+// (function) On click of Edit button on any given day block, display modal and get the activity description and location and save it to the current vacation name object in local storage
+    // Modal should have a save and cancel/close button
+    // On click of save button, save the description and location to the appropriate vacation name object in local storage
+    // Call the day block display function
+
+
+
 fetchLocationData("Richmond,VA");
+
