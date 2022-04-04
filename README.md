@@ -2,12 +2,18 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+This application is to assist in the planning of a successful vacation by providing an itinerary, weather and a map for each location for each day:
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+- The motivation for this application is to help plan a successful trip by providing critical weather and navigation information including:
+    - a local map
+    - an icon showing the forecasted weather - sunny, cloudy, raining ....
+    - forecasted high and low temperature
+    - forecasted humidity
+    - forecasted UVI
+    - forecasted sunrise and sunset times
+
+- We are building this application to provide the type of information for a trip that we would like to know in one place.  
+- There is also the added benefit of enhancing out frontend development skills as well as our project planning and collaboration skills.  
 
 ## Table of Contents (Optional)
 
@@ -34,17 +40,19 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
+Thomas Ciszek  https://github.com/ThomasCsk
+
 Mark Elliott  https://github.com/melliott7264
 
-List your collaborators, if any, with links to their GitHub profiles.
+Megan Middleton  https://github.com/youngff43
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+Used Positionstack (https://positionstack.com/) and Open Weather (https://openweathermap.org/) APIs.
 
-If you followed tutorials, include links to those here as well.
+Used Bulma CSS Framework (https://bulma.io/).
 
 ## License
 
-Copyright (c) 2022 Mark Elliott
+Copyright (c) 2022 Thomas Ciszek, Mark Elliott, and Megan Middleton
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
