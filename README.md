@@ -2,12 +2,18 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+This application is to assist in the planning of a successful vacation by providing an itinerary, weather and a map for each location for each day:
 
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+- The motivation for this application is to help plan a successful trip by providing critical weather and navigation information including:
+    - a local map
+    - an icon showing the forecasted weather - sunny, cloudy, raining ....
+    - forecasted high and low temperature
+    - forecasted humidity
+    - forecasted UVI
+    - forecasted sunrise and sunset times
+
+- We are building this application to provide the type of information for a trip that we would like to know in one place.  
+- There is also the added benefit of enhancing out frontend development skills as well as our project planning and collaboration skills.  
 
 ## Table of Contents (Optional)
 
