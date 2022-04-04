@@ -34,17 +34,19 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 
 ## Credits
 
+Thomas Ciszek  https://github.com/ThomasCsk
+
 Mark Elliott  https://github.com/melliott7264
 
-List your collaborators, if any, with links to their GitHub profiles.
+Megan Middleton  https://github.com/youngff43
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+Used Positionstack (https://positionstack.com/) and Open Weather (https://openweathermap.org/) APIs.
 
-If you followed tutorials, include links to those here as well.
+Used Bulma CSS Framework (https://bulma.io/).
 
 ## License
 
-Copyright (c) 2022 Mark Elliott
+Copyright (c) 2022 Thomas Ciszek, Mark Elliott, and Megan Middleton
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
