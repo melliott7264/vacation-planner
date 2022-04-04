@@ -11,11 +11,118 @@
 </head>
 <body>
     
+    <!-- Page 1 -->
+    <main class="container">
+        <!-- Header -->
+        <header class="is-flex is-flex-direction-column is-align-items-center">
+            <h1 class="title">Vacation Planner</h1>
+            <h2 class="subtitle mb-4">A website used to plan your trip, and check the Weather.</h2>
+        </header>
+        
+        <!-- Dates -->
+        <div class="is-flex is-flex-direction-column is-align-items-center">
+            <p>When would you like your trip to take place?</p>
+            <div class="is-flex">
+                <!-- Start Date -->
+                <input type="text" class="input is-success" id="start-date" placeholder="Start Date" autocomplete="off" />
+            
+                <!-- End Date -->
+                <input type="text" class="input is-danger" id="end-date" placeholder="End Date" autocomplete="off" />                
+            </div>
+
+        </div>
+
+        <!-- Content -->
+        <div class="m-4">
+            <!-- Day 1 example -->
+            <div class="is-flex is-flex-direction-column box">
+                <!-- Row 1 -->
+                <div class="is-flex columns">
+                    <!-- Date for activity -->
+                    <div class="column is-one-fifth is-mobile">05/27/2022</div>
+                    
+                    <!-- Description of Activity -->
+                    <div class="column is-three-fifths is-mobile">A walk in the park</div>
+                    
+                    <!-- Edit button modal-->
+                    <button class="js-modal-trigger button is-success is-outlined column is-mobile" data-target="modal-edit">
+                        Edit
+                    </button>
+
+                    
+                    
+                </div>
+                <!-- Row 2 -->
+                <div class="is-flex columns">
+                    <!-- Weather for date + location -->
+                    <div class="column is-four-fifths">Sunny skies</div>
+                    
+                    <!-- Map button -->
+                    <button class="button is-primary is-outlined column">Map of Area</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <!-- Footer text -->
+            <h4>Powered by a few awesome web-designers</h4>
+        </footer>
+    </main>    
+        
+
+    <!-- Page 2 -->
+    <section>
+        <!-- Information -->
+        <div></div>
+        
+        <!-- Map -->
+        <div></div>
+    </section>
+
+    <!-- Modal Content -->
+    <div id="modal-edit" class="modal">
+        <div class="modal-background"></div> <!-- makes clicking outside of the modal close it -->
+        
+        <!-- The modal -->
+        <div class="modal-card">  
+
+            <!-- Modal header -->
+            <header class="modal-card-head"> 
+                <p class="modal-card-title">Edit Task Description and Location</p>
+                <button class="delete" aria-label="close"></button> <!-- X button in the top right of modal -->
+            </header>
+
+            <!-- Modal content -->
+            <section class="modal-card-body"> 
+                
+                <!-- Task description box -->
+                <div>
+                    <label>Task description</label>
+                    <textarea id="modalTaskDescription" rows="3" class="textarea has-fixed-size"></textarea>
+                </div>
+
+                <!-- Location description box -->
+                <div>
+                    <label>Location</label>
+                    <textarea id="modalLocationDescription" rows="3" class="textarea has-fixed-size"></textarea>
+                </div>
+            </section>
+
+            <!-- Modal footer -->
+            <footer class="modal-card-foot level is-mobile">
+                <button class="button is-success is-responsive level-item">Save changes</button>
+                <button class="button is-responsive level-item">Cancel</button>
+            </footer>
+        </div>
+    </div>  
+        
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
 <script>dayjs.extend(window.dayjs_plugin_utc)</script>
 <script src="./assets/js/script.js"></script> 
+<script src="./assets/js/modal-script.js"></script>
 </body>
 </html>
