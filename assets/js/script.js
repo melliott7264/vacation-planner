@@ -62,12 +62,12 @@ var fetchWeatherData = function(vacationName, lat, lon, loc, units, date, map_ur
 
             });
         }  else {
-            alert("Error: OpenWeather User Not Found  " + response.status);
+            displayErrorMessage("OpenWeather User Not Found  " + response.status);
         }
     })
     .catch(function(error){
         // notice this .catch() is getting chained on the end of the .then() method
-        alert("Unable to connect to OpenWeather  " + error);
+        displayErrorMessage("Unable to connect to OpenWeather  " + error);
     });
 };
 
@@ -88,14 +88,20 @@ var fetchLocationData = function(vacationName, location, date) {
             });            
 
         }  else {
-            alert("Error: positionstack User Not Found  " + response.status);
+            displayErrorMessage("Positionstack User Not Found  " + response.status);
         }
     })
     .catch(function(error){
         // notice this .catch() is getting chained on the end of the .then() method
-        alert("Unable to connect to positionstack  " + error);
+        disaplyErrorMessage("Unable to connect to positionstack  " + error);
     });
     
+};
+
+// a function to display an error message through the error message modal
+var disaplyErrorMessage = function (message) {
+    $("#modal-error").addClass("modal is-active");
+    $(".error-msg-text").text(message);
 };
 
 
