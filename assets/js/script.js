@@ -38,11 +38,15 @@ var returnForecastData = function (vacationName, location, date, map_url, weathe
             //  
             tempVacationDataArray.push(tempVacationDateObj);
 
+            console.log(tempVacationDataArray);
+            
         } else {
             console.log("Matching date not found");
         }
     }
  };
+
+
 // function to retrieve weather data for a given location for a given date - note arguments to pass
 var fetchWeatherData = function(vacationName, lat, lon, loc, units, date, map_url) {
 
