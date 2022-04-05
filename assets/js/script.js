@@ -100,7 +100,7 @@ var fetchLocationData = function(vacationName, location, date) {
 
 // a function to display an error message through the error message modal
 var displayErrorMessage = function (message) {
-    $("#modal-error").addClass("modal is-active");
+    $("#modal-error").addClass("is-active");
     $(".error-msg-text").text(message);
 };
 
@@ -113,8 +113,8 @@ fetchLocationData("Vacation One", "Mechanicsville,VA", date);
 
 // ************************************** Start of pseudocode *****************************************
 // (name/date input function) get vacation name and start/end dates for trip.  Use a date picker for the dates.  Need to add a Build Trip button to process entered values.
-    // On click of the build trip button, validate that the end date is within 16 days of current date.  If not, display a modal with an error msg 
-        // and a box to enter another date.   Use a date picker.  Suggest that this modal have fields for both the start/end dates and populated
+    // On click of the build trip button, validate that the end date is within 7 days of current date.  If not, display a modal with an error msg 
+        // and a box to enter another date.  Use a date picker.  Suggest that this modal have fields for both the start/end dates and populated
         // with the dates we have, if any.
     // If a vacation name is entered without start/end dates, (load function) check to see if it is already in local storage.  If so,  retrieve the start/end dates.
         // Otherwise display a model box with an error msg to enter dates.   May be the same box as above.
