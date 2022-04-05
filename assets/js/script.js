@@ -93,13 +93,13 @@ var fetchLocationData = function(vacationName, location, date) {
     })
     .catch(function(error){
         // notice this .catch() is getting chained on the end of the .then() method
-        disaplyErrorMessage("Unable to connect to positionstack  " + error);
+        displayErrorMessage("Unable to connect to positionstack  " + error);
     });
     
 };
 
 // a function to display an error message through the error message modal
-var disaplyErrorMessage = function (message) {
+var displayErrorMessage = function (message) {
     $("#modal-error").addClass("modal is-active");
     $(".error-msg-text").text(message);
 };
