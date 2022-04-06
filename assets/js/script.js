@@ -1,17 +1,76 @@
 var tempVacationDataArray = [];
 var tempVacationDateObj = {};
 
+// load vacation data from localStorage
+var loadVacationData = function () {
+    if (localStorage.getItem("vacation")) {
+        tempVacationDataArray = JSON.parse(localStorage.getItem("vacation"));
+        return true;
+    } else {
+        return false;
+    }
+};
+
+var saveTempData = function (vacationName, tempVacationDateObj) {
+    // first load data from local storage if it exists
+    loadVacationData();
+
+    // check tempVacationDataArray for vacationName
+    for ( var i=0; i<tempVacationDataArray.length; i++) {
+        console.log("stored vacation name  " + tempVacationDataArray[i].vacation);
+        if (tempVacationDataArray[i].vacation === vacationName){
+            var nameFlag = true;
+            var nameIndex=i;
+            console.log("matched vacation name  " + i);
+        }
+    }
+    // if the vacation name is in the array, then we will push the tempVacationDateObj onto it
+    if (nameFlag) {  
+        // first, check to see if date info is already in the array
+        console.log("checking for date");    
+        for (var j=0; j<=tempVacationDataArray[nameIndex].day.length; j++) {
+            console.log(" stored date " + tempVacationDataArray[nameIndex].day[j].date);
+            console.log(" temp date " + tempVacationDateObj.date);
+            if (tempVacationDataArray[nameIndex].day[j].date === tempVacationDateObj.date){
+                var dateFlag = true;
+            }
+        }
+        if (!dateFlag) {
+            console.log("data not found... adding");
+            tempVacationDataArray[nameIndex].day.push(tempVacationDateObj);
+            console.log("Added " + vacationName + " to array");
+        }
+        
+    // otherwise we will push both the vacationName AND tempVacationDateObj onto the array.  this will only need to be done once.    
+    } else {
+
+        var tempVacationDataObj = {
+            vacation: vacationName,
+            day: [tempVacationDateObj] 
+            };
+
+        tempVacationDataArray.push(tempVacationDataObj);
+        console.log("Added tempVacationDateObj to " + vacationName);
+
+    }
+
+    // save the tempVacationDataArray back to localStorage
+    localStorage.setItem("vacation", JSON.stringify(tempVacationDataArray));
+
+    return;
+};
+
 // function to extract the weather data for a given location and date and save it to a temp object/array
-var returnForecastData = function (vacationName, location, date, map_url, weatherData,) {
+var returnForecastData = function (vacationName, activity, location, date, map_url, weatherData,) {
 
     console.log(location, weatherData);
 
     // need to find weather for date passed - using a for loop to check all the dates in the returned weatherData
-    for (i=0; i < weatherData.daily.length; i++) {
+    for (var i=0; i < weatherData.daily.length; i++) {
         // check date against date passed
-        if (date === dayjs(new Date(weatherData.daily[i].dt*1000)).format("YYYYMMDD")){
+        if (date === dayjs(new Date(weatherData.daily[i].dt*1000)).format("MM/DD/YY")){
             // example data returned
-            console.log(vacationName, location, dayjs(new Date(weatherData.daily[i].dt*1000)).format("MM/DD/YYYY"));
+            console.log(vacationName, location, dayjs(new Date(weatherData.daily[i].dt*1000)).format("MM/DD/YY"));
             console.log(map_url);
             console.log(weatherData.daily[i].weather[0].icon);
             // HTML format for icon:  "http://openweathermap.org/img/w/" + weatherData.daily[i].weather[0].icon + ".png"
@@ -19,11 +78,13 @@ var returnForecastData = function (vacationName, location, date, map_url, weathe
             console.log(weatherData.daily[i].humidity);
             console.log(weatherData.daily[i].uvi);
             console.log(dayjs(new Date(weatherData.daily[i].sunrise*1000)).format("h:mm A"), dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A"));
+            console.log(Math.round(weatherData.daily[i].wind_speed));
+
 
             // load data for a given date in a temporary object
             tempVacationDateObj = {
-                name: vacationName,
-                date: dayjs(new Date(weatherData.daily[i].dt*1000)).format("MM/DD/YYYY"),
+                date: date,
+                activity: activity,
                 loc: location,
                 map: map_url,
                 icon: weatherData.daily[i].weather[0].icon,
@@ -32,14 +93,14 @@ var returnForecastData = function (vacationName, location, date, map_url, weathe
                 humidity: weatherData.daily[i].humidity,
                 uvi: weatherData.daily[i].uvi,
                 sunrise: dayjs(new Date(weatherData.daily[i].sunrise*1000)).format("h:mm A"),
-                sunset:  dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A")
+                sunset:  dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A"),
+                wind: Math.round(weatherData.daily[i].wind_speed)
             };
-            //  push that temporary object on an array under the vacation name
-            //  
-            tempVacationDataArray.push(tempVacationDateObj);
 
-            console.log(tempVacationDataArray);
+            // must pass tempVacationDateObj to saveTempData function 
             
+            saveTempData(vacationName, tempVacationDateObj);            
+          
         } else {
             console.log("Matching date not found");
         }
@@ -48,7 +109,7 @@ var returnForecastData = function (vacationName, location, date, map_url, weathe
 
 
 // function to retrieve weather data for a given location for a given date - note arguments to pass
-var fetchWeatherData = function(vacationName, lat, lon, loc, units, date, map_url) {
+var fetchWeatherData = function(vacationName, activity, lat, lon, loc, units, date, map_url) {
 
     var apiKey = "12afd4d18f110d35ce3359c3e1919c84";
     var forecastUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=" + units + "&appid=" + apiKey;
@@ -58,7 +119,7 @@ var fetchWeatherData = function(vacationName, lat, lon, loc, units, date, map_ur
         if (response.ok) {
             response.json().then(function(data){
 
-                returnForecastData(vacationName, loc, date, map_url, data)
+                returnForecastData(vacationName, activity, loc, date, map_url, data)
 
             });
         }  else {
@@ -72,7 +133,7 @@ var fetchWeatherData = function(vacationName, lat, lon, loc, units, date, map_ur
 };
 
 // function to get location data for location and pass it on to the weather fetch function
-var fetchLocationData = function(vacationName, location, date) {
+var fetchLocationData = function(vacationName, activity, location, date) {
 
     var apiKey =  "f3daf114f7ab984d1e977c7fa53afcf7";
     var locationUrl = "https://api.positionstack.com/v1/forward?access_key=" + apiKey + "&query=" + location + "&output=json";
@@ -83,7 +144,7 @@ var fetchLocationData = function(vacationName, location, date) {
             response.json().then(function(data){
 
 
-                fetchWeatherData(vacationName, data.data[0].latitude,data.data[0].longitude, location, "imperial", date, data.data[0].map_url);    
+                fetchWeatherData(vacationName, activity, data.data[0].latitude,data.data[0].longitude, location, "imperial", date, data.data[0].map_url);    
                 
             });            
 
@@ -104,12 +165,11 @@ var displayErrorMessage = function (message) {
     $(".error-msg-text").text(message);
 };
 
-
 // hard coded values for testing fetches of API data
-var date = dayjs(new Date()).format("YYYYMMDD");
+var date = dayjs(new Date()).format("MM/DD/YY");
 
 // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage
-fetchLocationData("Vacation One", "Mechanicsville,VA", date);
+fetchLocationData("Vacation One", "Take a Hike", "Mechanicsville,VA", date);
 
 // ************************************** Start of pseudocode *****************************************
 // (name/date input function) get vacation name and start/end dates for trip.  Use a date picker for the dates.  Need to add a Build Trip button to process entered values.
