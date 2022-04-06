@@ -30,12 +30,14 @@ $("#name-date-submit").on("click",function(){ // function is run when the name-d
             tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
                 date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
                 loc: "",
+                activity: "",
                 map: "",
                 icon: "",
                 hiTemp: null, 
                 loTemp: null,
                 humidity: null,
                 uvi: null,
+                wind: null,
                 sunrise: "",
                 sunset:  ""
             }; 
@@ -60,6 +62,7 @@ var returnForecastData = function (location, map_url, weatherData,) {
         tempVacationDataArray[1][i].loTemp = Math.round(weatherData.daily[i].temp.min),
         tempVacationDataArray[1][i].humidity = weatherData.daily[i].humidity,
         tempVacationDataArray[1][i].uvi = weatherData.daily[i].uvi,
+        tempVacationDataArray[1][i].wind = Math.round(weatherData.daily[i].wind_speed),
         tempVacationDataArray[1][i].sunrise = dayjs(new Date(weatherData.daily[i].sunrise*1000)).format("h:mm A"),
         tempVacationDataArray[1][i].sunset =  dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A")
     }
