@@ -34,35 +34,9 @@
             <button id="name-date-submit" type="submit" class="button is-primary is-rounded name-submit-btn">Submit Name/Dates</button>
         </div>
 
-        <!-- Content -->
-        <div class="m-4">
-            <!-- Day 1 example -->
-            <div class="is-flex is-flex-direction-column box">
-                <!-- Row 1 -->
-                <div class="is-flex columns">
-                    <!-- Date for activity -->
-                    <div class="column is-one-fifth is-mobile">05/27/2022</div>
-                    
-                    <!-- Description of Activity -->
-                    <div class="column is-three-fifths is-mobile">A walk in the park</div>
-                    
-                    <!-- Edit button modal-->
-                    <button class="js-modal-trigger button is-success is-outlined column is-mobile edit-btn" data-target="modal-edit">
-                        Edit
-                    </button>
-
-                    
-                    
-                </div>
-                <!-- Row 2 -->
-                <div class="is-flex columns">
-                    <!-- Weather for date + location -->
-                    <div class="column is-four-fifths">Sunny skies</div>
-                    
-                    <!-- Map button -->
-                    <button class="button is-primary is-outlined column map-btn">Map of Area</button>
-                </div>
-            </div>
+        <!-- This is the permanent dates container - the container below is temporary -->
+        <div id="dates-container">
+            
         </div>
 
         <!-- Footer -->
@@ -153,7 +127,9 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
 <script>dayjs.extend(window.dayjs_plugin_utc)</script>
-<script src="./assets/js/script.js"></script> 
 <script src="./assets/js/modal-script.js"></script>
+<script src="./assets/js/display.js"></script>
+<script src="./assets/js/script.js"></script> 
+
 </body>
 </html>

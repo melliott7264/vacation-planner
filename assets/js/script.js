@@ -45,8 +45,8 @@ $("#name-date-submit").on("click",function(){ // function is run when the name-d
             // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage  
         }
         fetchLocationData("Mechanicsville,VA");
-        saveData();
-        //makeBlocksFunction()
+        
+        
     }
 })
 
@@ -66,6 +66,9 @@ var returnForecastData = function (location, map_url, weatherData,) {
         tempVacationDataArray[1][i].sunrise = dayjs(new Date(weatherData.daily[i].sunrise*1000)).format("h:mm A"),
         tempVacationDataArray[1][i].sunset =  dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A")
     }
+    
+    saveData();
+    displayDateBlocks();
  };
 
 
@@ -135,7 +138,7 @@ var loadData = function(){ // loads data from the local storage into our array
     if(tempVacationDataArray !== null){
         tempVacationDataArray = localStorage.getItem("vacation", JSON.stringify(tempVacationDataArray));
         tempVacationDataArray = JSON.parse(tempVacationDataArray);
-        //makeBlocksFunction()
+
     }
 }
 
