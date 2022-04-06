@@ -1,5 +1,49 @@
-var tempVacationDataArray = [];
+var tempVacationDataArray = [,[]];
 var tempVacationDateObj = {};
+
+$("#start-date").datepicker({
+    minDate: 1
+});
+$("#end-date").datepicker({
+    minDate: 1
+});
+
+$("#name-date-submit").on("click",function(){ // function is run when the name-date-submit button is pressed
+    
+    var tempDifference = dayjs($("#end-date").val()); // gets a value from the end date box
+    var dateDifference = tempDifference.diff($("#start-date").val(),'day') // variable used for the number of days between dates
+    
+    if($("#start-date").val()>$("#end-date").val()){ // checks to make sure the end date is after the start date
+        displayErrorMessage("Please choose a valid starting and ending date.")
+    }
+    else if(dateDifference > 7){ // makes sure that the dates are not more than a week apart
+        displayErrorMessage("Please choose dates that are 7 days apart max.")
+    }
+    else if($("#adventure-name").val() == "" || $("#adventure-name").val() == null){
+        displayErrorMessage("Please enter an Adventure Name.")
+    }
+    else{
+        tempVacationDataArray = [$("#adventure-name").val(),[]];
+        
+        for (i = 0; i < dateDifference+1; i++) { //the +1 is to allow the loop to count the current day as well
+            var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
+            tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
+                date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
+                loc: "",
+                map: "",
+                icon: "",
+                hiTemp: null, 
+                loTemp: null,
+                humidity: null,
+                uvi: null,
+                sunrise: "",
+                sunset:  ""
+            }; 
+            tempVacationDataArray[1].push(tempVacationDateObj); 
+        }
+        //makeBlocksFunction()
+    }
+})
 
 // function to extract the weather data for a given location and date and save it to a temp object/array
 var returnForecastData = function (vacationName, location, date, map_url, weatherData,) {
@@ -111,6 +155,20 @@ var date = dayjs(new Date()).format("YYYYMMDD");
 // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage
 fetchLocationData("Vacation One", "Mechanicsville,VA", date);
 
+var saveData = function(){ // saves the id num and inner text to the local storage
+    console.log(tempVacationDataArray);
+    localStorage.setItem("vacation", JSON.stringify(tempVacationDataArray))
+}
+  
+var loadData = function(){ // loads data from the local storage into our array
+    if(tempVacationDataArray !== null){
+        tempVacationDataArray = localStorage.getItem("vacation", JSON.stringify(tempVacationDataArray));
+        tempVacationDataArray = JSON.parse(tempVacationDataArray);
+        //makeBlocksFunction()
+    }
+}
+
+loadData()
 // ************************************** Start of pseudocode *****************************************
 // (name/date input function) get vacation name and start/end dates for trip.  Use a date picker for the dates.  Need to add a Build Trip button to process entered values.
     // On click of the build trip button, validate that the end date is within 7 days of current date.  If not, display a modal with an error msg 

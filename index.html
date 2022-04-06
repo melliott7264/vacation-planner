@@ -18,7 +18,7 @@
             <h1 class="title">Life Explorer</h1>
             <h2 class="subtitle mb-4">Trip Planner</h2>
             <h3 class="subtitle">Adventure Name</h3>
-            <input type="text" class="input is-primary is-rounded mb-4 vacation-name-input has-text-centered" placeholder="Adventure Name" autocomplete="off" />
+            <input id="adventure-name" type="text" class="input is-primary is-rounded mb-4 vacation-name-input has-text-centered" placeholder="Adventure Name" autocomplete="off" />
         </header>
         
         <!-- Dates -->
@@ -26,12 +26,12 @@
             <p>When would you like your trip to take place?</p>
             <div class="is-flex">
                 <!-- Start Date -->
-                <input type="text" class="input is-success has-text-centered" id="start-date" placeholder="Start Date" autocomplete="off" />
+                <input type="text" class="input is-success has-text-centered" id="start-date" placeholder="Start Date" autocomplete="off" readonly/>
             
                 <!-- End Date -->
-                <input type="text" class="input is-danger has-text-centered" id="end-date" placeholder="End Date" autocomplete="off" />                
+                <input type="text" class="input is-danger has-text-centered" id="end-date" placeholder="End Date" autocomplete="off" readonly/>                
             </div>
-            <button type="submit" class="button is-primary is-rounded name-submit-btn">Submit Name/Dates</button>
+            <button id="name-date-submit" type="submit" class="button is-primary is-rounded name-submit-btn">Submit Name/Dates</button>
         </div>
 
         <!-- Content -->
