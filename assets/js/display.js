@@ -36,8 +36,9 @@ var displayDateBlocks = function() {
         rowTwoContentEl.append(weatherColumnEl, tempColumnEl, sunColumnEl, mapButtonEl);
 
         // weather column content
-        var weatherIconEl = $("<img>").addClass("weather-icon").attr("src", "http://openweathermap.org/img/w/" + tempVacationDataArray[1][i].icon + ".png");
-        weatherColumnEl.append(weatherIconEl);
+        var locationEl = $("<p>").addClass("location has-text-centered").text(tempVacationDataArray[1][i].loc);
+        var weatherIconEl = $("<img>").addClass("weather-icon m-auto").attr("src", "http://openweathermap.org/img/w/" + tempVacationDataArray[1][i].icon + ".png");
+        weatherColumnEl.append(locationEl, weatherIconEl);
 
         // temp column content
         var highTempEl = $("<p>").addClass("forecast-weather-data").text("High  " + tempVacationDataArray[1][i].hiTemp + " F");
@@ -57,7 +58,7 @@ var displayDateBlocks = function() {
 
         // sunrise/sunset column
         var sunriseEl = $("<p>").addClass("forecast-weather-data").text("Sunrise  " + tempVacationDataArray[1][i].sunrise);
-        var sunsetEl = $("<p>").addClass("forecast-weather-data").text("Sunset   " + tempVacationDataArray[1][i].sunset);
+        var sunsetEl = $("<p>").addClass("forecast-weather-data").text("Sunset    " + tempVacationDataArray[1][i].sunset);
         var windEl = $("<p>").addClass("forecast-weather-data").text("Wind  " + tempVacationDataArray[1][i].wind + " MPH");
         sunColumnEl.append(sunriseEl, sunsetEl, windEl);
     } // end of for loop

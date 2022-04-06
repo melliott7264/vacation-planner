@@ -8,6 +8,7 @@
 }
 
 .weather-icon {
+    display:block;
     width: 100px;
 }
 
