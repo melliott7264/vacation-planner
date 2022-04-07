@@ -15,24 +15,24 @@ var displayDateBlocks = function() {
    // will need a for loop to populate all the day blocks
    for (var i = 0; i < tempVacationDataArray[1].length; i++) {
         //Build new day block
-        var dayContentBlockEl = $("<div>").addClass("day-content is-flex is-flex-direction-column box");
+        var dayContentBlockEl = $("<div>").addClass("day-content");
         tempContainerEl.append(dayContentBlockEl);
 
-        var rowOneContentEl = $("<div>").addClass("row-one is-flex columns");
-        var rowTwoContentEl = $("<div>").addClass("row-two is-flex columns");
+        var rowOneContentEl = $("<div>").addClass("row-one columns");
+        var rowTwoContentEl = $("<div>").addClass("row-two columns");
         dayContentBlockEl.append(rowOneContentEl, rowTwoContentEl);
 
         // Row 1 content
-        var dateContentEl  = $("<p>").addClass("day-date column is-mobile").text(tempVacationDataArray[1][i].date);
-        var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths is-mobile").text(tempVacationDataArray[1][i].activity);
-        var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth is-mobile edit-btn").attr("data-target","modal-edit").text("Edit");
+        var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[1][i].date);
+        var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[1][i].activity);
+        var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth edit-btn").attr("data-target","modal-edit").text("Edit");
         rowOneContentEl.append(dateContentEl, activityContentEl, editButtonEl);
 
         // Row 2 columns
         var weatherColumnEl = $("<div>").addClass("weather-column column");
         var tempColumnEl = $("<div>").addClass("temp-column column");
         var sunColumnEl = $("<div>").addClass("sun-column column");
-        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined column is-one-fifth map-btn").text("Map");
+        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column mb-4 map-btn").text("Map");
         rowTwoContentEl.append(weatherColumnEl, tempColumnEl, sunColumnEl, mapButtonEl);
 
         // weather column content
