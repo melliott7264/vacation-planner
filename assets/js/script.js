@@ -29,8 +29,8 @@ $("#name-date-submit").on("click",function(){ // function is run when the name-d
             var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
             tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
                 date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
-                loc: "",
-                activity: "",
+                loc: "Anywhere, USA",
+                activity: "no scheduled activities",
                 map: "",
                 icon: "",
                 hiTemp: null, 

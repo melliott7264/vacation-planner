@@ -25,7 +25,7 @@ var displayDateBlocks = function() {
         // Row 1 content
         var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[1][i].date);
         var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[1][i].activity);
-        var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth edit-btn").attr("data-target","modal-edit").text("Edit");
+        var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth edit-btn").attr("data-target","modal-edit").text("Edit").attr("data-index", i);
         rowOneContentEl.append(dateContentEl, activityContentEl, editButtonEl);
 
         // Row 2 columns
@@ -68,7 +68,14 @@ var displayDateBlocks = function() {
 
 // add event listener to display Edit modal on click of edit buttons
 $("#dates-container").on("click", ".js-modal-trigger", function(){
-    console.log("clicked on edit button");
+    var changeIndex = $(this).attr("data-index");
+    var saveChanges = $("#save-changes");
+    saveChanges.on("click", function(){
+    var activity =$("#modalTaskDescription").val();
+    var loc =$("#modalLocationDescription").val();
+    var currentActivity = JSON.parse(localStorage.getItem("vacation"));
+    console.log(currentActivity[1][changeIndex].activity);
+    }) 
     $("#modal-edit").addClass("is-active");
 });
 
