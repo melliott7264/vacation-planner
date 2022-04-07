@@ -64,4 +64,17 @@ var displayDateBlocks = function() {
     } // end of for loop
    
     return;
-};
+}; // End of Display function
+
+// add event listener to display Edit modal on click of edit buttons
+$("#dates-container").on("click", ".js-modal-trigger", function(){
+    console.log("clicked on edit button");
+    $("#modal-edit").addClass("is-active");
+});
+
+// add event listener for map button
+$("#dates-container").on("click", ".map-btn", function(){
+    console.log("clicked on map button");
+    
+});
+

@@ -66,7 +66,7 @@ var returnForecastData = function (location, map_url, weatherData,) {
         tempVacationDataArray[1][i].sunrise = dayjs(new Date(weatherData.daily[i].sunrise*1000)).format("h:mm A"),
         tempVacationDataArray[1][i].sunset =  dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A")
     }
-    
+
     saveData();
     displayDateBlocks();
  };
@@ -142,37 +142,5 @@ var loadData = function(){ // loads data from the local storage into our array
     }
 }
 
+// Load array from localStorage before all other actions
 loadData()
-// ************************************** Start of pseudocode *****************************************
-// (name/date input function) get vacation name and start/end dates for trip.  Use a date picker for the dates.  Need to add a Build Trip button to process entered values.
-    // On click of the build trip button, validate that the end date is within 7 days of current date.  If not, display a modal with an error msg 
-        // and a box to enter another date.  Use a date picker.  Suggest that this modal have fields for both the start/end dates and populated
-        // with the dates we have, if any.
-    // If a vacation name is entered without start/end dates, (load function) check to see if it is already in local storage.  If so,  retrieve the start/end dates.
-        // Otherwise display a model box with an error msg to enter dates.   May be the same box as above.
-
-// ( save function) If it doesn't already exist, create an object with the vacation name and save that object with the start/end dates to local storage
-
-// (day block display function) Use trip dates in a loop to:
-
-    // (two existing API fetch functions) fetch the weather for the location and date - must validate date passed to be within 7 days of the current date - otherwise get a new end date.
-        // (forecast extraction function) extract the correct day's weather from data returned (relative to current day) and pass it back to the display function via a temp object array
-    // display a block for each day in the trip including the date, the location if we have one yet, an event description if we have one, 
-        //the weather for that date if we have a loation, an edit button and a map icon.
-        // Display code should be preceeded by code to clear any existing day blocks.
-        // Create/recreate day blocks
-            // write date
-            // write activity description 
-            // write weather data to include:
-                // weather icon
-                // high and low temperature
-                // humidity
-                // UVI
-                // sunrise and sunset
-            // map icon/link
-            // edit button
-
-// (function) On click of Edit button on any given day block, display modal and get the activity description and location and save it to the current vacation name object in local storage
-    // Modal should have a save and cancel/close button
-    // On click of save button, save the description and location to the appropriate vacation name object in local storage
-    // Call the day block display function
