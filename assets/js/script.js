@@ -30,7 +30,7 @@ $("#name-date-submit").on("click",function(){ // function is run when the name-d
             tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
                 date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
                 loc: "Anywhere, USA",
-                activity: "no scheduled activities",
+                activity: "No Scheduled Activities",
                 map: "",
                 icon: "",
                 hiTemp: null, 
