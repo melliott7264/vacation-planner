@@ -132,7 +132,8 @@ var displayErrorMessage = function (message) {
 var saveData = function(){ // saves the id num and inner text to the local storage
     console.log(tempVacationDataArray);
     localStorage.setItem("vacation", JSON.stringify(tempVacationDataArray))
-}
+    return;
+};
   
 var loadData = function(){ // loads data from the local storage into our array
     if(tempVacationDataArray !== null){
@@ -140,7 +141,8 @@ var loadData = function(){ // loads data from the local storage into our array
         tempVacationDataArray = JSON.parse(tempVacationDataArray);
 
     }
-}
+    return;
+};
 
 // Load array from localStorage before all other actions
 loadData()
