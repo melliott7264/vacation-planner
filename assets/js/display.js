@@ -80,13 +80,11 @@ $("#save-changes").on("click", function(){
     var loc =$("#modalLocationDescription").val();
     tempVacationDataArray[1][changeIndex].loc = loc;
     tempVacationDataArray[1][changeIndex].activity = activity;
-    saveData();
-    displayDateBlocks();
+    fetchLocationData(tempVacationDataArray[0],loc,tempVacationDataArray[1][changeIndex].date,changeIndex);
     });
 
 // add event listener for map button
 $("#dates-container").on("click", ".map-btn", function(){
     console.log("clicked on map button");
-    
 });
 
