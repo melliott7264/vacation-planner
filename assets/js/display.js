@@ -39,7 +39,7 @@ var displayDateBlocks = function() {
         var tempColumnEl = $("<div>").addClass("temp-column column");
         var sunColumnEl = $("<div>").addClass("sun-column column");
         // var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").html("<img src='./assets/images/map.svg' width='50'>");
-        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").text("Map");
+        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").text("Map").attr("data-index", i);
         rowTwoContentEl.append(weatherColumnEl, tempColumnEl, sunColumnEl, mapButtonEl);
 
         // If we don't have a valid location and therefore valid weather data, the we can't display blank and null data

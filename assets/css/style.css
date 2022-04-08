@@ -19,3 +19,25 @@
 .day-date {
     font-size: 1.5rem;
 }
+
+#back-btn {
+    display: block;
+}
+
+#map-container {
+    position: relative;
+    padding-bottom: 60%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+#map-container iframe,
+#map-container object,
+#map-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
