@@ -1,58 +1,63 @@
 var tempVacationDataArray = [,[]];
 var tempVacationDateObj = {};
 
-$("#start-date").datepicker({
-    minDate: 0
-});
-$("#end-date").datepicker({
-    minDate: 0
-});
+// This function gets a vacation/adventure name and trip dates from which everthing else is initiated
+var startUp = function () {
 
-$("#name-date-submit").on("click",function(){ // function is run when the name-date-submit button is pressed
-    var today = dayjs();
-    var endVal = dayjs($("#end-date").val()); // gets a value from the end date box
-    var startVal = dayjs($("#start-date").val());
-    var endDifference = endVal.diff(today, 'day');
-    var startDifference = startVal.diff(today, 'day');
-    var dateDifference = endVal.diff(startVal,'day'); // variable used for the number of days between dates
+    $("#start-date").datepicker({
+        minDate: 0
+    });
+    $("#end-date").datepicker({
+        minDate: 0
+    });
 
-    if($("#start-date").val()>$("#end-date").val()){ // checks to make sure the end date is after the start date
-        displayErrorMessage("Please choose a valid starting and ending date.")
-    }
-    else if($("#adventure-name").val() == "" || $("#adventure-name").val() == null){
-        displayErrorMessage("Please enter an Adventure Name.")
-    }
-    else if(startDifference >= 7){
-        displayErrorMessage("Please keep the Adventure dates within one week from today, so that a proper weather forecast can be made.")
-    }
-    else if(endDifference >= 7){
-        displayErrorMessage("Please keep the Adventure dates within one week from today, so that a proper weather forecast can be made.")
-    }
-    else{
-        tempVacationDataArray = [$("#adventure-name").val(),[]];
-        
-        for (i = 0; i < dateDifference+1; i++) { //the +1 is to allow the loop to count the current day as well
-            var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
-            tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
-                date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
-                loc: "Anywhere, USA",
-                activity: "No Scheduled Activities",
-                map: "",
-                icon: "",
-                hiTemp: null, 
-                loTemp: null,
-                humidity: null,
-                uvi: null,
-                wind: null,
-                sunrise: "",
-                sunset:  ""
-            }; 
-            tempVacationDataArray[1].push(tempVacationDateObj); 
-            // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage  
-        }
-        displayDateBlocks();
-    }
-})
+    $("#name-date-submit").on("click",function(){ // function is run when the name-date-submit button is pressed
+        var today = dayjs();
+        var endVal = dayjs($("#end-date").val()); // gets a value from the end date box
+        var startVal = dayjs($("#start-date").val());
+        var endDifference = endVal.diff(today, 'day');
+        var startDifference = startVal.diff(today, 'day');
+        var dateDifference = endVal.diff(startVal,'day'); // variable used for the number of days between dates
+
+        if($("#start-date").val()>$("#end-date").val()){ // checks to make sure the end date is after the start date
+            displayErrorMessage("Please choose a valid starting and ending date.")
+            }
+            else if($("#adventure-name").val() == "" || $("#adventure-name").val() == null){
+                displayErrorMessage("Please enter an Adventure Name.")
+            }
+            else if(startDifference >= 7){
+                displayErrorMessage("Please keep the Adventure dates within one week from today, so that a proper weather forecast can be made.")
+            }
+            else if(endDifference >= 7){
+                displayErrorMessage("Please keep the Adventure dates within one week from today, so that a proper weather forecast can be made.")
+            }
+            else{
+                tempVacationDataArray = [$("#adventure-name").val(),[]];
+                
+                for (i = 0; i < dateDifference+1; i++) { //the +1 is to allow the loop to count the current day as well
+                    var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
+                    tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
+                        date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
+                        loc: "Anywhere, USA",
+                        activity: "No Scheduled Activities",
+                        map: "",
+                        icon: "",
+                        hiTemp: null, 
+                        loTemp: null,
+                        humidity: null,
+                        uvi: null,
+                        wind: null,
+                        sunrise: "",
+                        sunset:  ""
+                    }; 
+                    tempVacationDataArray[1].push(tempVacationDateObj); 
+                    // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage  
+                }
+                saveData();
+                displayDateBlocks();
+            }
+    })
+};
 
 // function to extract the weather data for a given location and date and save it to a temp object/array
 var returnForecastData = function (vacationName, location, date, map_url, weatherData, changeIndex) {
@@ -139,17 +144,27 @@ var displayErrorMessage = function (message) {
     $(".error-msg-text").text(message);
 };
 
+var startUpMessage = function () {
+    $("#modal-error").addClass("is-active");
+    $(".modal-error-message").text("Welcome - This is your first time here.");
+    $(".modal-error-btn").text("Start");
+    $(".error-msg-text").text("Please start your Adventure by entering an Adventure Name and a trip Start Date and an End Date.  Click the Submit Name/Dates button when you are done.");
+};
+
 var saveData = function(){ // saves the id num and inner text to the local storage
-    console.log(tempVacationDataArray);
-    localStorage.setItem("vacation", JSON.stringify(tempVacationDataArray))
+    localStorage.setItem("vacation", JSON.stringify(tempVacationDataArray));
     return;
 };
   
 var loadData = function(){ // loads data from the local storage into our array
-    tempVacationDataArray = localStorage.getItem("vacation", JSON.stringify(tempVacationDataArray));
-    tempVacationDataArray = JSON.parse(tempVacationDataArray);
-    displayDateBlocks()
-    return;
+    if (localStorage.getItem("vacation")) {
+        tempVacationDataArray = JSON.parse(localStorage.getItem("vacation"));
+        displayDateBlocks();
+    } else {
+        startUpMessage();
+        startUp();
+    }
+    
 };
 
 // Load array from localStorage before all other actions
