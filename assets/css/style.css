@@ -12,3 +12,10 @@
     width: 100px;
 }
 
+.forecast-weather-data, .location, .day-date, .day-activity {
+    font-weight: 700;
+}
+
+.day-date {
+    font-size: 1.5rem;
+}

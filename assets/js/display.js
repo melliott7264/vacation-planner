@@ -14,8 +14,14 @@ var displayDateBlocks = function() {
 
    // will need a for loop to populate all the day blocks
    for (var i = 0; i < tempVacationDataArray[1].length; i++) {
+
         //Build new day block
-        var dayContentBlockEl = $("<div>").addClass("day-content");
+        // alternate background colors of blocks
+        if (i%2 === 0) {
+            var dayContentBlockEl = $("<div>").addClass("day-content has-background-warning-light");
+        } else {
+            var dayContentBlockEl = $("<div>").addClass("day-content has-background-info-light");
+        }
         tempContainerEl.append(dayContentBlockEl);
 
         var rowOneContentEl = $("<div>").addClass("row-one columns");
@@ -25,14 +31,15 @@ var displayDateBlocks = function() {
         // Row 1 content
         var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[1][i].date);
         var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[1][i].activity);
-        var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth edit-btn").attr("data-target","modal-edit").text("Edit").attr("data-index", i);
+        var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth mr-4 edit-btn").attr("data-target","modal-edit").text("Edit").attr("data-index", i);
         rowOneContentEl.append(dateContentEl, activityContentEl, editButtonEl);
 
         // Row 2 columns
         var weatherColumnEl = $("<div>").addClass("weather-column column");
         var tempColumnEl = $("<div>").addClass("temp-column column");
         var sunColumnEl = $("<div>").addClass("sun-column column");
-        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column mb-4 map-btn").text("Map");
+        // var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").html("<img src='./assets/images/map.svg' width='50'>");
+        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").text("Map");
         rowTwoContentEl.append(weatherColumnEl, tempColumnEl, sunColumnEl, mapButtonEl);
 
         // If we don't have a valid location and therefore valid weather data, the we can't display blank and null data
