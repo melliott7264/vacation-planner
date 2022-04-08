@@ -66,25 +66,23 @@ var displayDateBlocks = function() {
     return;
 }; // End of Display function
 
+var changeIndex = 0;
+
 // add event listener to display Edit modal on click of edit buttons
 $("#dates-container").on("click", ".js-modal-trigger", function(){
-    var changeIndex = $(this).attr("data-index");
-    console.log(this);
-    var saveChanges = $("#save-changes");
-    saveChanges.on("click", function(){
+    changeIndex = $(this).attr("data-index");
+    $("#modal-edit").addClass("is-active");
+});
+
+// add event listener to save activity and location information per date
+$("#save-changes").on("click", function(){
     var activity =$("#modalTaskDescription").val();
     var loc =$("#modalLocationDescription").val();
-    // var currentActivity = JSON.parse(localStorage.getItem("vacation"));
-    // console.log(currentActivity[1][changeIndex].activity);
-    // debugger;
-    console.log(changeIndex, activity, loc);
     tempVacationDataArray[1][changeIndex].loc = loc;
     tempVacationDataArray[1][changeIndex].activity = activity;
     saveData();
     displayDateBlocks();
     });
-    $("#modal-edit").addClass("is-active");
-});
 
 // add event listener for map button
 $("#dates-container").on("click", ".map-btn", function(){
