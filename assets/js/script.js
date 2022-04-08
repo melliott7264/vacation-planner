@@ -145,10 +145,8 @@ var displayErrorMessage = function (message) {
 };
 
 var startUpMessage = function () {
-    $("#modal-error").addClass("is-active");
-    $(".modal-error-message").text("Welcome - This is your first time here.");
-    $(".modal-error-btn").text("Start");
-    $(".error-msg-text").text("Please start your Adventure by entering an Adventure Name and a trip Start Date and an End Date.  Click the Submit Name/Dates button when you are done.");
+    $("#modal-startup").addClass("is-active");
+    $(".startup-msg-text").text("Please start your Adventure by entering an Adventure Name and a trip Start Date and an End Date.  Click the Submit Name/Dates button when you are done.");
 };
 
 var saveData = function(){ // saves the id num and inner text to the local storage
