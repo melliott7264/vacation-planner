@@ -107,6 +107,10 @@ $("#save-changes").on("click", function(){
 // add event listener for map button
 $("#dates-container").on("click", ".map-btn", function(){
     console.log("clicked on map button");
-    
+    changeIndex=$(this).attr("data-index");
+    // pass changeIndex as a search string to the map.html file
+    window.location.href="map.html?"+ changeIndex;
 });
+
+
 
