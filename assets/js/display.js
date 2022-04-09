@@ -83,7 +83,7 @@ var displayDateBlocks = function() {
        
     } // end of for loop
    
-    return;
+    startUp();
 }; // End of Display function
 
 var changeIndex = 0;
