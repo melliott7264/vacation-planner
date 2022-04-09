@@ -18,9 +18,9 @@ var displayDateBlocks = function() {
         //Build new day block
         // alternate background colors of blocks
         if (i%2 === 0) {
-            var dayContentBlockEl = $("<div>").addClass("day-content has-background-warning-light");
+            var dayContentBlockEl = $("<div>").addClass("day-content bg-ivory");
         } else {
-            var dayContentBlockEl = $("<div>").addClass("day-content has-background-info-light");
+            var dayContentBlockEl = $("<div>").addClass("day-content bg-pewter");
         }
         tempContainerEl.append(dayContentBlockEl);
 
