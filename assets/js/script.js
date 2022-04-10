@@ -157,6 +157,7 @@ var saveData = function(){ // saves the id num and inner text to the local stora
 var loadData = function(){ // loads data from the local storage into our array
     if (localStorage.getItem("vacation")) {
         tempVacationDataArray = JSON.parse(localStorage.getItem("vacation"));
+        loadNameDates();        
         displayDateBlocks();
     } else {
         startUpMessage();
@@ -165,5 +166,10 @@ var loadData = function(){ // loads data from the local storage into our array
     
 };
 
+var loadNameDates = function(){
+    $("#adventure-name").val(tempVacationDataArray[0]);
+    $("#start-date").val(tempVacationDataArray[1][0].date);
+    $("#end-date").val(tempVacationDataArray[1][tempVacationDataArray[1].length-1].date);
+}
 // Load array from localStorage before all other actions
 loadData()
