@@ -45,7 +45,6 @@ var displayDateBlocks = function() {
         // If we don't have a valid location and therefore valid weather data, the we can't display blank and null data
         // If the location is "Anywhere, USA", we don't have valid data and need to display an alternative message
         if ( tempVacationDataArray[1][i].loc === "Anywhere, USA"){
-            console.log(tempVacationDataArray[1][i].loc);
             // weather column content
             var locationEl = $("<p>").addClass("location has-text-centered p-4").text(tempVacationDataArray[1][i].loc);
             var noWeatherDataEl = $("<p>").addClass("no-weather-msg has-text-centered p-4").text("No Weather Data Available");
@@ -107,7 +106,6 @@ $("#save-changes").on("click", function(){
 
 // add event listener for map button
 $("#dates-container").on("click", ".map-btn", function(){
-    console.log("clicked on map button");
     changeIndex=$(this).attr("data-index");
     // pass changeIndex as a search string to the map.html file
     window.location.href="map.html?"+ changeIndex;

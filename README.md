@@ -1,8 +1,8 @@
-# Vacation Planner
+# Life Explorer - Trip Planner
 
 ## Description
 
-This application is to assist in the planning of a successful vacation by providing an itinerary, weather and a map for each location for each day:
+This application is to assist in the planning of a successful adventure by providing an itinerary, weather and a map for each location for each day:
 
 - The motivation for this application is to help plan a successful trip by providing critical weather and navigation information including:
     - a local map
@@ -15,30 +15,50 @@ This application is to assist in the planning of a successful vacation by provid
 - We are building this application to provide the type of information for a trip that we would like to know in one place.  
 - There is also the added benefit of enhancing out frontend development skills as well as our project planning and collaboration skills.  
 
-## Table of Contents (Optional)
-
-If your README is long, add a table of contents to make it easy for users to find what they need.
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+Applciaton may be run from here: https://melliott7264.github.io/vacation-planner/
+
+As a web app, there is nothing that needs to be installed per se.  There is some configuration which will be covered in the instructions.   All trip data is saved in local storage and be deleted, if desired, through Developer Tools.   Open up Developer Tools (Option - Command - i on a Mac ) and select Applicaton from the top level menu.  Under Local Storage and the URL for the applicaton you can delete the "vacation" file if you choose to delete your trip information.
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+Application may be run from here: https://melliott7264.github.io/vacation-planner/
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+When you first load the applicaton, you will see the following Startup/Welcome screen.  Click on the Start button to get started setting up your adventure.
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+![Startup/welcome screenshot](./assets/images/ScreenSho2.png)
+
+On this screen,  you will type in a name for your adventure as well as a start date and an end date.   Clicking on the date field will result in a pop-up calendar to assist you in picking your dates.   As our weather forcast data is limited to a week out, you can't pick an ending date more than 7 days out from the current date.   When you have typed in a name and selected and start and end date, click on the Submit Name/Dates button.
+
+![Screenshot of adventure name and dates entry fields](./assets/images/ScreenShot3.png)
+
+Next,  you will be presented with a screen of blank dates for your upcoming adventure.  You must enter an activity and a location for each date.   Do this by clicking on the Edit button.
+
+![Screenshot with blank day/location entries](./assets/images/ScreenShot4.png)
+
+Clicking on the Edit button will pop-up the following entry/edit screen allowing you to enter a detailed description of your activity for the day as well as a location.   You can type in any reasonable location.   We suggest a City and State in the format you normally enter it for an address.  You can also enter a full address.   Click on the Save button when you are done.
+
+![Screenshot of activity/location entry screen ](./assets/images/ScreenShot5.png)
+
+This will then dislay the date block with the new activity, the new location, and weather data for that location on that day.   You can also now click on the Map button to get a map of the location.
+
+![Screenshot with filled day/location entries](./assets/images/ScreenShot1.png)
+
+Once you are on the Map screen, you can zoom in and zoom out on the map and drag it around.  With a track pad, you pinch to zoom out and spread your fingers to zoom in.  You click and drag to move the map around.  Click on the back button to go back to the screen with all the day display blocks.
+
+![Screenshot with filled day/location entries](./assets/images/ScreenShot6.png)
+
+Right now, you can only have one plan at a time.   If you summit a new name and or dates, you will overwrite your previous plan.  We intend to add the option to have and manage multiple plans in future releases.
+
+![Screenshot with filled day/location entries](./assets/images/ScreenShot1.png)
+
+
 
 ## Credits
+
+Developers:
 
 Thomas Ciszek  https://github.com/ThomasCsk
 
@@ -46,9 +66,17 @@ Mark Elliott  https://github.com/melliott7264
 
 Megan Middleton  https://github.com/youngff43
 
+APIs, frameworks, and resources:
+
 Used Positionstack (https://positionstack.com/) and Open Weather (https://openweathermap.org/) APIs.
 
 Used Bulma CSS Framework (https://bulma.io/).
+
+Used Google fonts https://fonts.google.com/
+
+Used iconic https://useiconic.com/open
+
+Used Jquery and Jquery UI.
 
 ## License
 
@@ -74,22 +102,3 @@ SOFTWARE.
 
 ---
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
