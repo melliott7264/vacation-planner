@@ -101,7 +101,8 @@ $("#save-changes").on("click", function(){
     tempVacationDataArray[1][changeIndex].loc = loc;
     tempVacationDataArray[1][changeIndex].activity = activity;
     fetchLocationData(tempVacationDataArray[0],loc,tempVacationDataArray[1][changeIndex].date,changeIndex);
-   
+    $("#modalTaskDescription").val("");
+    $("#modalLocationDescription").val("");
 });
 
 // add event listener for map button
