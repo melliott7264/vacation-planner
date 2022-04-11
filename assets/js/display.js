@@ -54,7 +54,7 @@ var displayDateBlocks = function() {
 
             // weather column content
             var locationEl = $("<p>").addClass("location has-text-centered").text(tempVacationDataArray[1][i].loc);
-            var weatherIconEl = $("<img>").addClass("weather-icon m-auto").attr("src", "http://openweathermap.org/img/w/" + tempVacationDataArray[1][i].icon + ".png");
+            var weatherIconEl = $("<img>").addClass("weather-icon m-auto").attr("src", "https://openweathermap.org/img/w/" + tempVacationDataArray[1][i].icon + ".png");
             weatherColumnEl.append(locationEl, weatherIconEl);
 
             // temp column content
