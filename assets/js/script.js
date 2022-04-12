@@ -146,7 +146,7 @@ var displayErrorMessage = function (message) {
 
 var startUpMessage = function () {
     $("#modal-startup").addClass("is-active");
-    $(".startup-msg-text").text("Please start your Adventure by entering an Adventure Name and a trip Start Date and an End Date.  Click the Submit Name/Dates button when you are done.");
+    $(".startup-msg-text").text("Please start your Adventure by entering an Adventure Name and a trip Start Date and an End Date on the next screen.  Click the Submit Name/Dates button when you are done.");
 };
 
 var saveData = function(){ // saves the id num and inner text to the local storage
