@@ -46,7 +46,7 @@ This will then dislay the date block with the new activity, the new location, an
 
 ![Screenshot with filled day/location entries](./assets/images/ScreenShot1.png)
 
-Once you are on the Map screen, you can zoom in and zoom out on the map and drag it around.  With a track pad, you pinch to zoom out and spread your fingers to zoom in.  You click and drag to move the map around.  Click on the back button to go back to the screen with all the day display blocks.
+Once you are on the Map screen, you can zoom in and zoom out on the map and drag it around.  With a track pad, you pinch to zoom out and spread your fingers to zoom in.  You click and drag to move the map around.  Click on the back button to go back to the screen with all the day display blocks.  If  you get a map page that is zoomed all the way out to a world view, do a hard reload (Shift and click on reload button in Chrome).
 
 ![Screenshot with filled day/location entries](./assets/images/ScreenShot6.png)
 
