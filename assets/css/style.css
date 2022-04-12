@@ -1,3 +1,20 @@
+* {
+    font-family: Montserrat, serif;
+}
+
+:root {
+    --bg-color-ivory: #F9F6F1;
+    --bg-color-pewter: #F1E7E4;
+}
+
+.bg-ivory {
+    background-color: var(--bg-color-ivory);
+}
+
+.bg-pewter {
+    background-color: var(--bg-color-pewter);
+}
+
 .vacation-name-input {
     width: 300px;
 }
@@ -7,9 +24,70 @@
     margin: 10px;
 }
 
-.edit-btn, .map-btn {
-    width: 75px;
+.name-submit-btn {
+    font-weight: 700;
 }
 
+.weather-icon {
+    display:block;
+    width: 100px;
+}
 
+.forecast-weather-data, .location, .day-date, .day-activity {
+    font-weight: 700;
+}
 
+.day-date {
+    font-size: 1.25rem;
+}
+
+#back-btn {
+    display: block;
+}
+
+#map-container {
+    position: relative;
+    padding-bottom: 60%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+#map-container iframe,
+#map-container object,
+#map-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.subtitle, .subtitle-map {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+@media screen and (min-width: 1200px) {
+    .subtitle, .subtitle-map {
+        font-size: 2rem;
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+
+    .forecast-weather-data, .location, .day-activity {
+        font-size: 1.25rem
+    }
+    
+    .day-date {
+        font-size: 1.5rem;
+    }
+    
+}

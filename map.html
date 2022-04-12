@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"/> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
+    <link rel="stylesheet" href="./assets/css/style.css" /> 
+    <title>Vacation Planner/Map</title>
+</head>
+<body>
+    
+    <!-- Page 1 -->
+    <main class="container">
+        <!-- Header -->
+        <header class="is-flex is-flex-direction-column is-align-items-center">
+            <h1 class="title">Life Explorer</h1>
+            <h2 class="subtitle mb-4">Trip Planner</h2>
+            <h3 class="subtitle-map">Map</h3>
+        </header>
+
+        <!-- This is the permanent map container - the container below is temporary -->
+        <section id="map-container" class="map-container">
+            <iframe class="local-map-embed" width="350" height="450" frameborder ="0" scrolling="no" marginheight="0" marginwidth="0" src="https://map.positionstack.com/export/embed.html?bbox=-77.421384,37.576865,-77.293361,37.679824&layer=mapnik&marker=37.629118,-77.365716" title="Mechanicsville,VA"></iframe>    
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Note: Do a hard reload if you get a map image that is zoomed all the way out to a world view.</p><br>
+            <!-- button to go back to index.html -->
+            <button class="button is-responsive has-text-centered m-auto" id="back-btn"><a href="index.html">Back</a></button>
+            <!-- Footer text -->
+            <h4>Created by Thomas Ciszek, Mark Elliott, & Megan Middleton &copy; 2022</h4>
+        </footer>
+    </main>    
+        
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
+<script>dayjs.extend(window.dayjs_plugin_utc)</script>
+<script src="./assets/js/display.js"></script>
+<script src="./assets/js/modal-script.js"></script>
+<script src="./assets/js/script.js"></script> 
+<script src="./assets/js/map.js"></script>
+</body>
+</html>

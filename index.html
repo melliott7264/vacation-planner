@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"/>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"/> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat"/>
     <link rel="stylesheet" href="./assets/css/style.css" /> 
     <title>Vacation Planner</title>
 </head>
@@ -15,10 +17,10 @@
     <main class="container">
         <!-- Header -->
         <header class="is-flex is-flex-direction-column is-align-items-center">
-            <h1 class="title">Vacation Planner</h1>
-            <h2 class="subtitle mb-4">A website used to plan your trip, and check the Weather.</h2>
-            <h3 class="subtitle">Vacation Name</h3>
-            <input type="text" class="input is-primary is-rounded mb-4 vacation-name-input" placeholder="Vacation Name" autocomplete="off" />
+            <h1 class="title">Life Explorer</h1>
+            <h2 class="subtitle mb-4">Trip Planner</h2>
+            <h3 class="subtitle">Adventure Name</h3>
+            <input id="adventure-name" type="text" class="input is-primary is-rounded mb-4 vacation-name-input has-text-centered" placeholder="Adventure Name" autocomplete="off" />
         </header>
         
         <!-- Dates -->
@@ -26,49 +28,23 @@
             <p>When would you like your trip to take place?</p>
             <div class="is-flex">
                 <!-- Start Date -->
-                <input type="text" class="input is-success" id="start-date" placeholder="Start Date" autocomplete="off" />
+                <input type="text" class="input is-success has-text-centered" id="start-date" placeholder="Start Date" autocomplete="off" readonly/>
             
                 <!-- End Date -->
-                <input type="text" class="input is-danger" id="end-date" placeholder="End Date" autocomplete="off" />                
+                <input type="text" class="input is-danger has-text-centered" id="end-date" placeholder="End Date" autocomplete="off" readonly/>                
             </div>
-
+            <button id="name-date-submit" type="submit" class="button is-primary is-rounded name-submit-btn">Submit Name/Dates</button>
         </div>
 
-        <!-- Content -->
-        <div class="m-4">
-            <!-- Day 1 example -->
-            <div class="is-flex is-flex-direction-column box">
-                <!-- Row 1 -->
-                <div class="is-flex columns">
-                    <!-- Date for activity -->
-                    <div class="column is-one-fifth is-mobile">05/27/2022</div>
-                    
-                    <!-- Description of Activity -->
-                    <div class="column is-three-fifths is-mobile">A walk in the park</div>
-                    
-                    <!-- Edit button modal-->
-                    <button class="js-modal-trigger button is-success is-outlined column is-mobile edit-btn" data-target="modal-edit">
-                        Edit
-                    </button>
-
-                    
-                    
-                </div>
-                <!-- Row 2 -->
-                <div class="is-flex columns">
-                    <!-- Weather for date + location -->
-                    <div class="column is-four-fifths">Sunny skies</div>
-                    
-                    <!-- Map button -->
-                    <button class="button is-primary is-outlined column map-btn">Map of Area</button>
-                </div>
-            </div>
+        <!-- This is the permanent dates container - the container below is temporary -->
+        <div id="dates-container">
+            
         </div>
 
         <!-- Footer -->
         <footer class="footer">
             <!-- Footer text -->
-            <h4>Powered by a few awesome web-designers</h4>
+            <h4>Created by Thomas Ciszek, Mark Elliott, & Megan Middleton &copy; 2022</h4>
         </footer>
     </main>    
         
@@ -91,7 +67,7 @@
 
             <!-- Modal header -->
             <header class="modal-card-head"> 
-                <p class="modal-card-title">Edit Task Description and Location</p>
+                <p class="modal-card-title">Edit Activity Description and Location</p>
                 <button class="delete" aria-label="close"></button> <!-- X button in the top right of modal -->
             </header>
 
@@ -100,7 +76,7 @@
                 
                 <!-- Task description box -->
                 <div>
-                    <label>Task description</label>
+                    <label>Activity description</label>
                     <textarea id="modalTaskDescription" rows="3" class="textarea has-fixed-size"></textarea>
                 </div>
 
@@ -113,8 +89,66 @@
 
             <!-- Modal footer -->
             <footer class="modal-card-foot level is-mobile">
-                <button class="button is-success is-responsive level-item">Save changes</button>
-                <button class="button is-responsive level-item">Cancel</button>
+                <button class="button is-success is-responsive level-item" id="save-changes">Save changes</button>
+                <button class="button is-responsive level-item" id="cancel">Cancel</button>
+            </footer>
+        </div>
+    </div>  
+
+    <!-- Modal Error Message -->
+    <div id="modal-error" class="modal">
+        <div class="modal-background"></div> <!-- makes clicking outside of the modal close it -->
+        
+        <!-- The modal -->
+        <div class="modal-card">  
+
+            <!-- Modal header -->
+            <header class="modal-card-head"> 
+                <p class="modal-card-title modal-error-message">There has been a problem.</p>
+                <button class="delete" aria-label="close"></button> <!-- X button in the top right of modal -->
+            </header>
+
+            <!-- Modal content -->
+            <section class="modal-card-body"> 
+                
+                <!-- Message -->
+                <div>
+                    <p class="error-msg-text">This is an error message.</p>
+                </div>
+
+            </section>
+            <!-- Modal footer -->
+            <footer class="modal-card-foot level is-mobile">
+                <button class="button is-responsive level-item modal-error-btn">Cancel</button>
+            </footer>
+        </div>
+    </div>  
+
+    <!-- Modal Startup Message -->
+    <div id="modal-startup" class="modal">
+        <div class="modal-background"></div> <!-- makes clicking outside of the modal close it -->
+        
+        <!-- The modal -->
+        <div class="modal-card">  
+
+            <!-- Modal header -->
+            <header class="modal-card-head"> 
+                <p class="modal-card-title modal-startup-message">Welcome - This is your first time here.</p>
+                <button class="delete" aria-label="close"></button> <!-- X button in the top right of modal -->
+            </header>
+
+            <!-- Modal content -->
+            <section class="modal-card-body"> 
+                
+                <!-- Message -->
+                <div>
+                    <p class="startup-msg-text">This is an error message.</p>
+                </div>
+
+            </section>
+            <!-- Modal footer -->
+            <footer class="modal-card-foot level is-mobile">
+                <button class="button is-responsive level-item modal-startup-btn">Start</button>
             </footer>
         </div>
     </div>  
@@ -124,7 +158,8 @@
 <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
 <script src="https://unpkg.com/dayjs@1.8.21/plugin/utc.js"></script>
 <script>dayjs.extend(window.dayjs_plugin_utc)</script>
-<script src="./assets/js/script.js"></script> 
+<script src="./assets/js/display.js"></script>
 <script src="./assets/js/modal-script.js"></script>
+<script src="./assets/js/script.js"></script> 
 </body>
 </html>
