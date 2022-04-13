@@ -13,7 +13,7 @@ var displayDateBlocks = function() {
    datesContainerEl.append(tempContainerEl);
 
    // will need a for loop to populate all the day blocks
-   for (var i = 0; i < tempVacationDataArray[1].length; i++) {
+   for (var i = 0; i < tempVacationDataArray[0].length; i++) {
 
         //Build new day block
         // alternate background colors of blocks
@@ -29,8 +29,8 @@ var displayDateBlocks = function() {
         dayContentBlockEl.append(rowOneContentEl, rowTwoContentEl);
 
         // Row 1 content
-        var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[1][i].date);
-        var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[1][i].activity);
+        var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[0][i].date);
+        var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[0][i].activity);
         var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth mr-4 edit-btn").attr("data-target","modal-edit").text("Edit").attr("data-index", i);
         rowOneContentEl.append(dateContentEl, activityContentEl, editButtonEl);
 
@@ -44,39 +44,39 @@ var displayDateBlocks = function() {
 
         // If we don't have a valid location and therefore valid weather data, the we can't display blank and null data
         // If the location is "Anywhere, USA", we don't have valid data and need to display an alternative message
-        if ( tempVacationDataArray[1][i].loc === "Anywhere, USA"){
+        if ( tempVacationDataArray[0][i].loc === "Anywhere, USA"){
             // weather column content
-            var locationEl = $("<p>").addClass("location has-text-centered p-4").text(tempVacationDataArray[1][i].loc);
+            var locationEl = $("<p>").addClass("location has-text-centered p-4").text(tempVacationDataArray[0][i].loc);
             var noWeatherDataEl = $("<p>").addClass("no-weather-msg has-text-centered p-4").text("No Weather Data Available");
             weatherColumnEl.append(locationEl, noWeatherDataEl);
     
         } else {
 
             // weather column content
-            var locationEl = $("<p>").addClass("location has-text-centered").text(tempVacationDataArray[1][i].loc);
+            var locationEl = $("<p>").addClass("location has-text-centered").text(tempVacationDataArray[0][i].loc);
             var weatherIconEl = $("<img>").addClass("weather-icon m-auto").attr("src", "https://openweathermap.org/img/w/" + tempVacationDataArray[1][i].icon + ".png");
             weatherColumnEl.append(locationEl, weatherIconEl);
 
             // temp column content
-            var highTempEl = $("<p>").addClass("forecast-weather-data").text("High  " + tempVacationDataArray[1][i].hiTemp + " F");
-            var lowTempEl = $("<p>").addClass("forecast-weather-data").text("Low   " + tempVacationDataArray[1][i].loTemp + " F");
-            var humidityEl = $("<p>").addClass("forecast-weather-data").text("Humidity  " + tempVacationDataArray[1][i].humidity + " %");
+            var highTempEl = $("<p>").addClass("forecast-weather-data").text("High  " + tempVacationDataArray[0][i].hiTemp + " F");
+            var lowTempEl = $("<p>").addClass("forecast-weather-data").text("Low   " + tempVacationDataArray[0][i].loTemp + " F");
+            var humidityEl = $("<p>").addClass("forecast-weather-data").text("Humidity  " + tempVacationDataArray[0][i].humidity + " %");
 
             // Need to check UVI levels and set a status color; good, warning, danger
-            if (tempVacationDataArray[1][i].uvi <= 2) {
-                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-success has-text-white").text("UV Index: " + tempVacationDataArray[1][i].uvi);
-            } else if (tempVacationDataArray[1][i].uvi >2 && tempVacationDataArray[1][i].uvi <6) {
-                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-warning has-text-black").text("UV Index: " + tempVacationDataArray[1][i].uvi);
+            if (tempVacationDataArray[0][i].uvi <= 2) {
+                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-success has-text-white").text("UV Index: " + tempVacationDataArray[0][i].uvi);
+            } else if (tempVacationDataArray[0][i].uvi >2 && tempVacationDataArray[1][i].uvi <6) {
+                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-warning has-text-black").text("UV Index: " + tempVacationDataArray[0][i].uvi);
             } else {
-                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-danger has-text-white").text("UV Index: " + tempVacationDataArray[1][i].uvi);
+                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-danger has-text-white").text("UV Index: " + tempVacationDataArray[0][i].uvi);
             }
 
             tempColumnEl.append(highTempEl, lowTempEl, humidityEl, uviEl);
 
             // sunrise/sunset column
-            var sunriseEl = $("<p>").addClass("forecast-weather-data").text("Sunrise  " + tempVacationDataArray[1][i].sunrise);
-            var sunsetEl = $("<p>").addClass("forecast-weather-data").text("Sunset    " + tempVacationDataArray[1][i].sunset);
-            var windEl = $("<p>").addClass("forecast-weather-data").text("Wind  " + tempVacationDataArray[1][i].wind + " MPH");
+            var sunriseEl = $("<p>").addClass("forecast-weather-data").text("Sunrise  " + tempVacationDataArray[0][i].sunrise);
+            var sunsetEl = $("<p>").addClass("forecast-weather-data").text("Sunset    " + tempVacationDataArray[0][i].sunset);
+            var windEl = $("<p>").addClass("forecast-weather-data").text("Wind  " + tempVacationDataArray[0][i].wind + " MPH");
             sunColumnEl.append(sunriseEl, sunsetEl, windEl);
         }
        
@@ -97,9 +97,9 @@ $("#dates-container").on("click", ".js-modal-trigger", function(){
 $("#save-changes").on("click", function(){
     var activity =$("#modalTaskDescription").val();
     var loc =$("#modalLocationDescription").val();
-    tempVacationDataArray[1][changeIndex].loc = loc;
-    tempVacationDataArray[1][changeIndex].activity = activity;
-    fetchLocationData(tempVacationDataArray[0],loc,tempVacationDataArray[1][changeIndex].date,changeIndex);
+    tempVacationDataArray[0][changeIndex].loc = loc;
+    tempVacationDataArray[0][changeIndex].activity = activity;
+    fetchLocationData(tempVacationDataArray[0],loc,tempVacationDataArray[0][changeIndex].date,changeIndex);
     $("#modalTaskDescription").val("");
     $("#modalLocationDescription").val("");
 });

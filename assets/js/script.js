@@ -1,7 +1,18 @@
-var tempVacationDataArray = [,[]];
+var tempVacationDataArray = [[]];
 var tempVacationDateObj = {};
+var planIndex = 0;
 
-// This function gets a vacation/adventure name and trip dates from which everthing else is initiated
+// This function finds the index for the current trip plan in the tempVacationDataArray - returns planIndex used by the rest of the scripts/functions
+var findIndex = function (name) {
+    for (var i=0; i< tempVacationDataArray.length; i++) {
+        if (tempVacationDataArray[i][0].name === name){
+            return i;
+        }
+    }
+    return false;
+}
+
+// This function gets a vacation/adventure name and trip dates from which everything else is initiated
 var startUp = function () {
 
     $("#start-date").datepicker({
@@ -31,30 +42,35 @@ var startUp = function () {
             else if(endDifference >= 7){
                 displayErrorMessage("Please keep the Adventure dates within one week from today, so that a proper weather forecast can be made.")
             }
-            else{
-                tempVacationDataArray = [$("#adventure-name").val(),[]];
-                
-                for (i = 0; i < dateDifference+1; i++) { //the +1 is to allow the loop to count the current day as well
-                    var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
-                    tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
-                        date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
-                        loc: "Anywhere, USA",
-                        activity: "No Scheduled Activities",
-                        map: "",
-                        icon: "",
-                        hiTemp: null, 
-                        loTemp: null,
-                        humidity: null,
-                        uvi: null,
-                        wind: null,
-                        sunrise: "",
-                        sunset:  ""
-                    }; 
-                    tempVacationDataArray[1].push(tempVacationDateObj); 
-                    // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage  
+            else{  // if no other name exists in the array create a new entry in the array for a trip plan 
+                planIndex = findIndex($("#adventure-name").val())
+                if (!planIndex){
+                    for (i = 0; i < dateDifference+1; i++) { //the +1 is to allow the loop to count the current day as well
+                        var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
+                        tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
+                            name: $("#adventure-name").val(),
+                            date: dayjs(currentDate).format("MM/DD/YYYY"), //makes the date format easier to read
+                            loc: "Anywhere, USA",
+                            activity: "No Scheduled Activities",
+                            map: "",
+                            icon: "",
+                            hiTemp: null, 
+                            loTemp: null,
+                            humidity: null,
+                            uvi: null,
+                            wind: null,
+                            sunrise: "",
+                            sunset:  ""
+                        }; 
+                        // push object onto array for index of vacaton name - need to obtain index in for loop at top of else statement. 
+                        tempVacationDataArray.push(tempVacationDateObj); 
+                        console.log(tempVacationDataArray);
+                        // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage  
+                    }
+                    saveData();
+                    displayDateBlocks();
                 }
-                saveData();
-                displayDateBlocks();
+             
             }
     })
 };
@@ -167,9 +183,9 @@ var loadData = function(){ // loads data from the local storage into our array
 };
 
 var loadNameDates = function(){
-    $("#adventure-name").val(tempVacationDataArray[0]);
-    $("#start-date").val(tempVacationDataArray[1][0].date);
-    $("#end-date").val(tempVacationDataArray[1][tempVacationDataArray[1].length-1].date);
+    $("#adventure-name").val(tempVacationDataArray[0][0].name);
+    $("#start-date").val(tempVacationDataArray[0][0].date);
+    $("#end-date").val(tempVacationDataArray[0][tempVacationDataArray[0].length-1].date);
 }
 // Load array from localStorage before all other actions
 loadData()
