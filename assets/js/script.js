@@ -2,12 +2,18 @@ var tempVacationDataArray = [[]];
 var tempVacationDateObj = {};
 var planIndex = 0;
 
+console.log(tempVacationDataArray);
+console.log(tempVacationDateObj);
+
 // This function finds the index for the current trip plan in the tempVacationDataArray - returns planIndex used by the rest of the scripts/functions
 var findIndex = function (name) {
-    for (var i=0; i< tempVacationDataArray.length; i++) {
-        if (tempVacationDataArray[i][0].name === name){
-            return i;
-        }
+    if (localStorage.getItem("vacation")) {
+        for (var i=0; i< tempVacationDataArray.length; i++) {
+                if (tempVacationDataArray[i][0].name === name){
+                    return i;
+                }
+            }
+
     }
     return false;
 }
@@ -44,7 +50,16 @@ var startUp = function () {
             }
             else{  // if no other name exists in the array create a new entry in the array for a trip plan 
                 planIndex = findIndex($("#adventure-name").val())
+                console.log("planIndex  " + planIndex);
                 if (!planIndex){
+                    // if array is not empty then set currentIndex to tempVacationDataArray.length
+                    if (tempVacationDataArray[0].length > 0) {
+                        currentIndex = tempVacationDataArray.length;
+                        tempVacationDataArray[currentIndex] = [];
+                    } else {
+                        currentIndex = 0;
+                    }
+                    console.log("currentIndex " + currentIndex);
                     for (i = 0; i < dateDifference+1; i++) { //the +1 is to allow the loop to count the current day as well
                         var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
                         tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
@@ -61,14 +76,17 @@ var startUp = function () {
                             wind: null,
                             sunrise: "",
                             sunset:  ""
-                        }; 
-                        // push object onto array for index of vacaton name - need to obtain index in for loop at top of else statement. 
-                        tempVacationDataArray.push(tempVacationDateObj); 
+                        };
+                
+                        tempVacationDataArray[currentIndex].push(tempVacationDateObj);
+    
                         console.log(tempVacationDataArray);
                         // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage  
                     }
                     saveData();
-                    displayDateBlocks();
+                    displayDateBlocks($("#adventure-name").val());
+                } else {
+                    displayDateBlocks($("#adventure-name").val());
                 }
              
             }
@@ -77,29 +95,29 @@ var startUp = function () {
 
 // function to extract the weather data for a given location and date and save it to a temp object/array
 var returnForecastData = function (vacationName, location, date, map_url, weatherData, changeIndex) {
-
+    planIndex=findIndex(vacationName);
     // need to find weather for date passed - using a for loop to check all the dates in the returned weatherData
     for (i=0; i < weatherData.daily.length; i++) {
         // check date against date passed
         if (date === dayjs(new Date(weatherData.daily[i].dt*1000)).format("MM/DD/YYYY")){
 
-            tempVacationDataArray[1][changeIndex].loc = location,
-            tempVacationDataArray[1][changeIndex].map = map_url,
-            tempVacationDataArray[1][changeIndex].icon = weatherData.daily[i].weather[0].icon,
-            tempVacationDataArray[1][changeIndex].hiTemp = Math.round(weatherData.daily[i].temp.max), 
-            tempVacationDataArray[1][changeIndex].loTemp = Math.round(weatherData.daily[i].temp.min),
-            tempVacationDataArray[1][changeIndex].humidity = weatherData.daily[i].humidity,
-            tempVacationDataArray[1][changeIndex].uvi = weatherData.daily[i].uvi,
-            tempVacationDataArray[1][changeIndex].wind = Math.round(weatherData.daily[i].wind_speed),
-            tempVacationDataArray[1][changeIndex].sunrise = dayjs(new Date(weatherData.daily[i].sunrise*1000)).format("h:mm A"),
-            tempVacationDataArray[1][changeIndex].sunset =  dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A")
+            tempVacationDataArray[planIndex][changeIndex].loc = location,
+            tempVacationDataArray[planIndex][changeIndex].map = map_url,
+            tempVacationDataArray[planIndex][changeIndex].icon = weatherData.daily[i].weather[0].icon,
+            tempVacationDataArray[planIndex][changeIndex].hiTemp = Math.round(weatherData.daily[i].temp.max), 
+            tempVacationDataArray[planIndex][changeIndex].loTemp = Math.round(weatherData.daily[i].temp.min),
+            tempVacationDataArray[planIndex][changeIndex].humidity = weatherData.daily[i].humidity,
+            tempVacationDataArray[planIndex][changeIndex].uvi = weatherData.daily[i].uvi,
+            tempVacationDataArray[planIndex][changeIndex].wind = Math.round(weatherData.daily[i].wind_speed),
+            tempVacationDataArray[planIndex][changeIndex].sunrise = dayjs(new Date(weatherData.daily[i].sunrise*1000)).format("h:mm A"),
+            tempVacationDataArray[planIndex][changeIndex].sunset =  dayjs(new Date(weatherData.daily[i].sunset*1000)).format("h:mm A")
             
         } else {
             console.log("Matching date not found");
         }
     };
     saveData();
-    displayDateBlocks();
+    displayDateBlocks(vacationName);
  };
 
 
@@ -173,8 +191,9 @@ var saveData = function(){ // saves the id num and inner text to the local stora
 var loadData = function(){ // loads data from the local storage into our array
     if (localStorage.getItem("vacation")) {
         tempVacationDataArray = JSON.parse(localStorage.getItem("vacation"));
-        loadNameDates();        
-        displayDateBlocks();
+        planIndex=0;
+        loadNameDates(planIndex);        
+        displayDateBlocks(tempVacationDataArray[planIndex][0].name);
     } else {
         startUpMessage();
         startUp();
@@ -182,10 +201,10 @@ var loadData = function(){ // loads data from the local storage into our array
     
 };
 
-var loadNameDates = function(){
-    $("#adventure-name").val(tempVacationDataArray[0][0].name);
-    $("#start-date").val(tempVacationDataArray[0][0].date);
-    $("#end-date").val(tempVacationDataArray[0][tempVacationDataArray[0].length-1].date);
+var loadNameDates = function(index){
+    $("#adventure-name").val(tempVacationDataArray[index][0].name);
+    $("#start-date").val(tempVacationDataArray[index][0].date);
+    $("#end-date").val(tempVacationDataArray[index][tempVacationDataArray[index].length-1].date);
 }
 // Load array from localStorage before all other actions
 loadData()
