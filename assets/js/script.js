@@ -2,9 +2,6 @@ var tempVacationDataArray = [[]];
 var tempVacationDateObj = {};
 var planIndex = 0;
 
-console.log(tempVacationDataArray);
-console.log(tempVacationDateObj);
-
 // This function finds the index for the current trip plan in the tempVacationDataArray - returns planIndex used by the rest of the scripts/functions
 var findIndex = function (name) {
     if (localStorage.getItem("vacation")) {
@@ -191,6 +188,20 @@ var saveData = function(){ // saves the id num and inner text to the local stora
 var loadData = function(){ // loads data from the local storage into our array
     if (localStorage.getItem("vacation")) {
         tempVacationDataArray = JSON.parse(localStorage.getItem("vacation"));
+        // check to see if more than one vacation plan
+        console.log ("tempVacationDataArray.length  " + tempVacationDataArray.length);
+        if (tempVacationDataArray.length >= 1) {
+            var planListArray = [];
+            // find and list all vacation names
+            for (i=0; i < tempVacationDataArray.length; i++) {
+                // Just getting the name from the first entry 
+                planListArray.push(tempVacationDataArray[i][0].name);
+            }
+        }
+        console.log("List of plans " + planListArray);
+        // display list of plans and accept a selection
+        // pass plan name to findIndex to get planIndex
+
         planIndex=0;
         loadNameDates(planIndex);        
         displayDateBlocks(tempVacationDataArray[planIndex][0].name);
