@@ -180,6 +180,29 @@ var startUpMessage = function () {
     $(".startup-msg-text").text("Please start your Adventure by entering an Adventure Name and a trip Start Date and an End Date on the next screen.  Click the Submit Name/Dates button when you are done.");
 };
 
+var selectedPlan = ""
+
+// This function uses the modal-selection to get a selected plan for a list passed to this function.  
+var getPlanSelection = function  (planList) {
+    // call function to display modal with drop-down menu generated from planList
+    displayPlanSelection(planList);
+    $("#trip-plan").selectmenu();
+
+    // get selection on click of selection button - listen on div #plan-selection for modal-selection-btn
+    $("#modal-selection").on("click", ".modal-selection-btn", function(){
+    // get selected plan
+    selectedPlan = $("#trip-plan :selected").val();
+    // close modal
+    $("#modal-selection").removeClass("is-active");
+
+    // get the index of the selected plan to send to loadNameDates and displayDateBlocks
+    planIndex = findIndex(selectedPlan);
+    loadNameDates(planIndex);        
+    displayDateBlocks(tempVacationDataArray[planIndex][0].name);
+
+    });     
+};
+
 var saveData = function(){ // saves the id num and inner text to the local storage
     localStorage.setItem("vacation", JSON.stringify(tempVacationDataArray));
     return;
@@ -199,12 +222,10 @@ var loadData = function(){ // loads data from the local storage into our array
             }
         }
         console.log("List of plans " + planListArray);
-        // display list of plans and accept a selection
-        // pass plan name to findIndex to get planIndex
 
-        planIndex=0;
-        loadNameDates(planIndex);        
-        displayDateBlocks(tempVacationDataArray[planIndex][0].name);
+        // display list of plans and accept a selection - call function getPlanSelection - Will redirect execution to loadNameDates and displayDateBlocks
+        getPlanSelection(planListArray);
+        
     } else {
         startUpMessage();
         startUp();

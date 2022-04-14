@@ -88,6 +88,32 @@ var displayDateBlocks = function(name) {
     startUp();
 }; // End of Display function
 
+var displayPlanSelection = function(planList) {
+    // activate plan selection modal
+    $("#modal-selection").addClass("is-active");
+    
+    // define <div> to which to append <select>
+    var tripPlanDivEl = $("#plan-selection");
+
+    // define <select> element to receive drop-down options
+    var tripPlanSelectionEl = $("#trip-plan");
+
+    // clear out old options by removing the <select>
+    tripPlanSelectionEl.remove();
+    
+    // recreate <select> that was removed
+    var tripPlanSelectEl = $("<select>").attr("name", "plan").attr("id", "trip-plan");
+    tripPlanDivEl.append(tripPlanSelectEl);
+
+    // for loop to loop through planList and build list of options in modal
+    for (i=0; i < planList.length; i++) { 
+        var tripPlanOptionEl = $("<option>").val(planList[i]).text(planList[i]);
+        tripPlanSelectEl.append(tripPlanOptionEl)
+    }
+
+    return;
+};
+
 var changeIndex = 0;
 
 // add event listener to display Edit modal on click of edit buttons
@@ -113,6 +139,9 @@ $("#dates-container").on("click", ".map-btn", function(){
     // pass changeIndex as a search string to the map.html file
     window.location.href="map.html?"+ changeIndex;
 });
+
+
+
 
 
 

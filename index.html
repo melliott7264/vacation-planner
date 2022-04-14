@@ -152,6 +152,45 @@
             </footer>
         </div>
     </div>  
+    <!-- Modal Plan Selection Message -->
+    <div id="modal-selection" class="modal">
+        <div class="modal-background"></div> <!-- makes clicking outside of the modal close it -->
+        
+        <!-- The modal -->
+        <div class="modal-card">  
+
+            <!-- Modal header -->
+            <header class="modal-card-head"> 
+                <p class="modal-card-title modal-startup-message">Plan Selection</p>
+                <button class="delete" aria-label="close"></button> <!-- X button in the top right of modal -->
+            </header>
+
+            <!-- Modal content -->
+            <section class="modal-card-body"> 
+                
+                <!-- Drop-down menu to select plan -->
+                <div>
+                    <p class="startup-msg-text">There is more than one trip plan.  Please select the plan you wish from the drop down menu.</p>
+                </div>
+                <div class="drop-down">
+                    <form>
+                        <fieldset>
+                            <label for="plan">Select the Trip Plan</label>
+                            <div id="plan-selection" class="">
+                                <select name="plan" id="trip-plan">
+                               
+                                </select>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </section>
+            <!-- Modal footer -->
+            <footer class="modal-card-foot level is-mobile">
+                <button class="button is-responsive level-item modal-selection-btn">Selection</button>
+            </footer>
+        </div>
+    </div>  
         
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
