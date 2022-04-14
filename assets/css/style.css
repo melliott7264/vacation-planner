@@ -7,6 +7,11 @@
     --bg-color-pewter: #F1E7E4;
 }
 
+.trip-selector-btn {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
 .bg-ivory {
     background-color: var(--bg-color-ivory);
 }
@@ -25,6 +30,7 @@
 }
 
 .name-submit-btn {
+    font-size: 1.25rem;
     font-weight: 700;
 }
 
