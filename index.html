@@ -19,7 +19,7 @@
         <header class="is-flex is-flex-direction-column is-align-items-center">
             <h1 class="title">Life Explorer</h1>
             <h2 class="subtitle mb-4">Trip Planner</h2>
-            <h3 class="subtitle">Adventure Name</h3>
+            <h3 class="subtitle"><button class="button is-primary is-info trip-selector-btn" id="plan-selection-btn">Trip Selector</button></h3>
             <input id="adventure-name" type="text" class="input is-primary is-rounded mb-4 vacation-name-input has-text-centered" placeholder="Adventure Name" autocomplete="off" />
         </header>
         
@@ -149,6 +149,46 @@
             <!-- Modal footer -->
             <footer class="modal-card-foot level is-mobile">
                 <button class="button is-responsive level-item modal-startup-btn">Start</button>
+            </footer>
+        </div>
+    </div>  
+    <!-- Modal Plan Selection Message -->
+    <div id="modal-selection" class="modal">
+        <div class="modal-background"></div> <!-- makes clicking outside of the modal close it -->
+        
+        <!-- The modal -->
+        <div class="modal-card">  
+
+            <!-- Modal header -->
+            <header class="modal-card-head"> 
+                <p class="modal-card-title modal-startup-message">Plan Selection</p>
+                <button class="delete" aria-label="close"></button> <!-- X button in the top right of modal -->
+            </header>
+
+            <!-- Modal content -->
+            <section class="modal-card-body"> 
+                
+                <!-- Drop-down menu to select plan -->
+                <div>
+                    <p class="startup-msg-text">There is more than one trip plan.  Please select the plan you wish to Select or Remove from the drop down menu and click the appropriate button.</p>
+                </div>
+                <div class="drop-down">
+                    <form>
+                        <fieldset>
+                            <label for="plan">Select the Trip Plan</label>
+                            <div id="plan-selection" class="">
+                                <select name="plan" id="trip-plan">
+                               
+                                </select>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </section>
+            <!-- Modal footer -->
+            <footer class="modal-card-foot level is-mobile">
+                <button class="button is-responsive level-item modal-selection-btn">Select</button>
+                <button class="button is-responsive level-item modal-selection-remove-btn">Remove</button>
             </footer>
         </div>
     </div>  

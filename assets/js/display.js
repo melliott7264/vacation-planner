@@ -1,5 +1,10 @@
 // display date blocks for each date in array
-var displayDateBlocks = function() {
+var displayDateBlocks = function(name) {
+    // find the index of the plan to display
+    planIndex = findIndex(name);
+
+    console.log("planIndex from displayDateBlocks " + planIndex);
+
     // define overall container that holds temporary content
    var datesContainerEl = $("#dates-container")
 
@@ -13,7 +18,7 @@ var displayDateBlocks = function() {
    datesContainerEl.append(tempContainerEl);
 
    // will need a for loop to populate all the day blocks
-   for (var i = 0; i < tempVacationDataArray[1].length; i++) {
+   for (var i = 0; i < tempVacationDataArray[planIndex].length; i++) {
 
         //Build new day block
         // alternate background colors of blocks
@@ -29,8 +34,8 @@ var displayDateBlocks = function() {
         dayContentBlockEl.append(rowOneContentEl, rowTwoContentEl);
 
         // Row 1 content
-        var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[1][i].date);
-        var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[1][i].activity);
+        var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[planIndex][i].date);
+        var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[planIndex][i].activity);
         var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth mr-4 edit-btn").attr("data-target","modal-edit").text("Edit").attr("data-index", i);
         rowOneContentEl.append(dateContentEl, activityContentEl, editButtonEl);
 
@@ -39,44 +44,44 @@ var displayDateBlocks = function() {
         var tempColumnEl = $("<div>").addClass("temp-column column");
         var sunColumnEl = $("<div>").addClass("sun-column column");
         // var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").html("<img src='./assets/images/map.svg' width='50'>");
-        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").text("Map").attr("data-index", i);
+        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").text("Map").attr("data-index", i).attr("data-plan", planIndex);
         rowTwoContentEl.append(weatherColumnEl, tempColumnEl, sunColumnEl, mapButtonEl);
 
         // If we don't have a valid location and therefore valid weather data, the we can't display blank and null data
         // If the location is "Anywhere, USA", we don't have valid data and need to display an alternative message
-        if ( tempVacationDataArray[1][i].loc === "Anywhere, USA"){
+        if ( tempVacationDataArray[planIndex][i].loc === "Anywhere, USA"){
             // weather column content
-            var locationEl = $("<p>").addClass("location has-text-centered p-4").text(tempVacationDataArray[1][i].loc);
+            var locationEl = $("<p>").addClass("location has-text-centered p-4").text(tempVacationDataArray[planIndex][i].loc);
             var noWeatherDataEl = $("<p>").addClass("no-weather-msg has-text-centered p-4").text("No Weather Data Available");
             weatherColumnEl.append(locationEl, noWeatherDataEl);
     
         } else {
 
             // weather column content
-            var locationEl = $("<p>").addClass("location has-text-centered").text(tempVacationDataArray[1][i].loc);
-            var weatherIconEl = $("<img>").addClass("weather-icon m-auto").attr("src", "https://openweathermap.org/img/w/" + tempVacationDataArray[1][i].icon + ".png");
+            var locationEl = $("<p>").addClass("location has-text-centered").text(tempVacationDataArray[planIndex][i].loc);
+            var weatherIconEl = $("<img>").addClass("weather-icon m-auto").attr("src", "https://openweathermap.org/img/w/" + tempVacationDataArray[planIndex][i].icon + ".png");
             weatherColumnEl.append(locationEl, weatherIconEl);
 
             // temp column content
-            var highTempEl = $("<p>").addClass("forecast-weather-data").text("High  " + tempVacationDataArray[1][i].hiTemp + " F");
-            var lowTempEl = $("<p>").addClass("forecast-weather-data").text("Low   " + tempVacationDataArray[1][i].loTemp + " F");
-            var humidityEl = $("<p>").addClass("forecast-weather-data").text("Humidity  " + tempVacationDataArray[1][i].humidity + " %");
+            var highTempEl = $("<p>").addClass("forecast-weather-data").text("High  " + tempVacationDataArray[planIndex][i].hiTemp + " F");
+            var lowTempEl = $("<p>").addClass("forecast-weather-data").text("Low   " + tempVacationDataArray[planIndex][i].loTemp + " F");
+            var humidityEl = $("<p>").addClass("forecast-weather-data").text("Humidity  " + tempVacationDataArray[planIndex][i].humidity + " %");
 
             // Need to check UVI levels and set a status color; good, warning, danger
-            if (tempVacationDataArray[1][i].uvi <= 2) {
-                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-success has-text-white").text("UV Index: " + tempVacationDataArray[1][i].uvi);
-            } else if (tempVacationDataArray[1][i].uvi >2 && tempVacationDataArray[1][i].uvi <6) {
-                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-warning has-text-black").text("UV Index: " + tempVacationDataArray[1][i].uvi);
+            if (tempVacationDataArray[0][i].uvi <= 2) {
+                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-success has-text-white").text("UV Index: " + tempVacationDataArray[planIndex][i].uvi);
+            } else if (tempVacationDataArray[planIndex][i].uvi >2 && tempVacationDataArray[planIndex][i].uvi <6) {
+                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-warning has-text-black").text("UV Index: " + tempVacationDataArray[planIndex][i].uvi);
             } else {
-                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-danger has-text-white").text("UV Index: " + tempVacationDataArray[1][i].uvi);
+                var uviEl = $("<p>").addClass("forecast-weather-data uvi has-background-danger has-text-white").text("UV Index: " + tempVacationDataArray[planIndex][i].uvi);
             }
 
             tempColumnEl.append(highTempEl, lowTempEl, humidityEl, uviEl);
 
             // sunrise/sunset column
-            var sunriseEl = $("<p>").addClass("forecast-weather-data").text("Sunrise  " + tempVacationDataArray[1][i].sunrise);
-            var sunsetEl = $("<p>").addClass("forecast-weather-data").text("Sunset    " + tempVacationDataArray[1][i].sunset);
-            var windEl = $("<p>").addClass("forecast-weather-data").text("Wind  " + tempVacationDataArray[1][i].wind + " MPH");
+            var sunriseEl = $("<p>").addClass("forecast-weather-data").text("Sunrise  " + tempVacationDataArray[planIndex][i].sunrise);
+            var sunsetEl = $("<p>").addClass("forecast-weather-data").text("Sunset    " + tempVacationDataArray[planIndex][i].sunset);
+            var windEl = $("<p>").addClass("forecast-weather-data").text("Wind  " + tempVacationDataArray[planIndex][i].wind + " MPH");
             sunColumnEl.append(sunriseEl, sunsetEl, windEl);
         }
        
@@ -85,31 +90,67 @@ var displayDateBlocks = function() {
     startUp();
 }; // End of Display function
 
+var displayPlanSelection = function(planList) {
+    // activate plan selection modal
+    $("#modal-selection").addClass("is-active");
+    
+    // define <div> to which to append <select>
+    var tripPlanDivEl = $("#plan-selection");
+
+    // define <select> element to receive drop-down options
+    var tripPlanSelectionEl = $("#trip-plan");
+
+    // clear out old options by removing the <select>
+    tripPlanSelectionEl.remove();
+    
+    // recreate <select> that was removed
+    var tripPlanSelectEl = $("<select>").attr("name", "plan").attr("id", "trip-plan");
+    tripPlanDivEl.append(tripPlanSelectEl);
+
+    // for loop to loop through planList and build list of options in modal
+    for (i=0; i < planList.length; i++) { 
+        var tripPlanOptionEl = $("<option>").val(planList[i]).text(planList[i]);
+        tripPlanSelectEl.append(tripPlanOptionEl)
+    }
+
+    return;
+};
+
 var changeIndex = 0;
 
 // add event listener to display Edit modal on click of edit buttons
 $("#dates-container").on("click", ".js-modal-trigger", function(){
     changeIndex = $(this).attr("data-index");
     $("#modal-edit").addClass("is-active");
+    if (tempVacationDataArray[planIndex][changeIndex].loc !== "Anywhere, USA") {
+        $("#modalTaskDescription").val(tempVacationDataArray[planIndex][changeIndex].activity);
+        $("#modalLocationDescription").val(tempVacationDataArray[planIndex][changeIndex].loc);
+    }
 });
 
 // add event listener to save activity and location information per date
 $("#save-changes").on("click", function(){
     var activity =$("#modalTaskDescription").val();
     var loc =$("#modalLocationDescription").val();
-    tempVacationDataArray[1][changeIndex].loc = loc;
-    tempVacationDataArray[1][changeIndex].activity = activity;
-    fetchLocationData(tempVacationDataArray[0],loc,tempVacationDataArray[1][changeIndex].date,changeIndex);
+    tempVacationDataArray[planIndex][changeIndex].loc = loc;
+    tempVacationDataArray[planIndex][changeIndex].activity = activity;
+    fetchLocationData(tempVacationDataArray[planIndex][changeIndex].name,loc,tempVacationDataArray[planIndex][changeIndex].date,changeIndex);
     $("#modalTaskDescription").val("");
     $("#modalLocationDescription").val("");
 });
 
 // add event listener for map button
 $("#dates-container").on("click", ".map-btn", function(){
-    changeIndex=$(this).attr("data-index");
+    changeIndex = $(this).attr("data-index");
+    planIndex = $(this).attr("data-plan");
     // pass changeIndex as a search string to the map.html file
-    window.location.href="map.html?"+ changeIndex;
+    window.location.href="map.html?"+ changeIndex + "&" + planIndex;
 });
+
+$("#plan-selection-btn").on("click", function() {
+    getPlanSelection();
+});
+
 
 
 
