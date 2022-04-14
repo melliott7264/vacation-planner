@@ -19,7 +19,7 @@
         <header class="is-flex is-flex-direction-column is-align-items-center">
             <h1 class="title">Life Explorer</h1>
             <h2 class="subtitle mb-4">Trip Planner</h2>
-            <h3 class="subtitle">Adventure Name</h3>
+            <h3 class="subtitle"><button class="button is-primary is-info" id="plan-selection-btn">Adventure Name</button></h3>
             <input id="adventure-name" type="text" class="input is-primary is-rounded mb-4 vacation-name-input has-text-centered" placeholder="Adventure Name" autocomplete="off" />
         </header>
         
@@ -170,7 +170,7 @@
                 
                 <!-- Drop-down menu to select plan -->
                 <div>
-                    <p class="startup-msg-text">There is more than one trip plan.  Please select the plan you wish from the drop down menu.</p>
+                    <p class="startup-msg-text">There is more than one trip plan.  Please select the plan you wish to Select or Remove from the drop down menu and click the appropriate button.</p>
                 </div>
                 <div class="drop-down">
                     <form>
@@ -187,7 +187,8 @@
             </section>
             <!-- Modal footer -->
             <footer class="modal-card-foot level is-mobile">
-                <button class="button is-responsive level-item modal-selection-btn">Selection</button>
+                <button class="button is-responsive level-item modal-selection-btn">Select</button>
+                <button class="button is-responsive level-item modal-selection-remove-btn">Remove</button>
             </footer>
         </div>
     </div>  

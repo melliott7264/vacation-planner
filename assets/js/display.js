@@ -3,6 +3,8 @@ var displayDateBlocks = function(name) {
     // find the index of the plan to display
     planIndex = findIndex(name);
 
+    console.log("planIndex from displayDateBlocks " + planIndex);
+
     // define overall container that holds temporary content
    var datesContainerEl = $("#dates-container")
 
@@ -42,7 +44,7 @@ var displayDateBlocks = function(name) {
         var tempColumnEl = $("<div>").addClass("temp-column column");
         var sunColumnEl = $("<div>").addClass("sun-column column");
         // var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").html("<img src='./assets/images/map.svg' width='50'>");
-        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").text("Map").attr("data-index", i);
+        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").text("Map").attr("data-index", i).attr("data-plan", planIndex);
         rowTwoContentEl.append(weatherColumnEl, tempColumnEl, sunColumnEl, mapButtonEl);
 
         // If we don't have a valid location and therefore valid weather data, the we can't display blank and null data
@@ -120,6 +122,10 @@ var changeIndex = 0;
 $("#dates-container").on("click", ".js-modal-trigger", function(){
     changeIndex = $(this).attr("data-index");
     $("#modal-edit").addClass("is-active");
+    if (tempVacationDataArray[planIndex][changeIndex].loc !== "Anywhere, USA") {
+        $("#modalTaskDescription").val(tempVacationDataArray[planIndex][changeIndex].activity);
+        $("#modalLocationDescription").val(tempVacationDataArray[planIndex][changeIndex].loc);
+    }
 });
 
 // add event listener to save activity and location information per date
@@ -135,12 +141,15 @@ $("#save-changes").on("click", function(){
 
 // add event listener for map button
 $("#dates-container").on("click", ".map-btn", function(){
-    changeIndex=$(this).attr("data-index");
+    changeIndex = $(this).attr("data-index");
+    planIndex = $(this).attr("data-plan");
     // pass changeIndex as a search string to the map.html file
-    window.location.href="map.html?"+ changeIndex;
+    window.location.href="map.html?"+ changeIndex + "&" + planIndex;
 });
 
-
+$("#plan-selection-btn").on("click", function() {
+    getPlanSelection();
+});
 
 
 

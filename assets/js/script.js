@@ -183,24 +183,48 @@ var startUpMessage = function () {
 var selectedPlan = ""
 
 // This function uses the modal-selection to get a selected plan for a list passed to this function.  
-var getPlanSelection = function  (planList) {
+var getPlanSelection = function  () {
+    // check to see if more than one vacation plan
+    if (tempVacationDataArray.length >= 1) {
+        var planListArray = [];
+        // find and list all vacation names
+        for (i=0; i < tempVacationDataArray.length; i++) {
+            // Just getting the name from the first entry 
+            planListArray.push(tempVacationDataArray[i][0].name);
+        }
+    }
+    console.log("List of plans " + planListArray);
+
     // call function to display modal with drop-down menu generated from planList
-    displayPlanSelection(planList);
+    displayPlanSelection(planListArray);
     $("#trip-plan").selectmenu();
 
     // get selection on click of selection button - listen on div #plan-selection for modal-selection-btn
     $("#modal-selection").on("click", ".modal-selection-btn", function(){
-    // get selected plan
-    selectedPlan = $("#trip-plan :selected").val();
-    // close modal
-    $("#modal-selection").removeClass("is-active");
+        // get selected plan
+        selectedPlan = $("#trip-plan :selected").val();
+        // close modal
+        $("#modal-selection").removeClass("is-active");
 
-    // get the index of the selected plan to send to loadNameDates and displayDateBlocks
-    planIndex = findIndex(selectedPlan);
-    loadNameDates(planIndex);        
-    displayDateBlocks(tempVacationDataArray[planIndex][0].name);
+        // get the index of the selected plan to send to loadNameDates and displayDateBlocks
+        planIndex = findIndex(selectedPlan);
+        console.log("planIndex from click on Selection plan button " + planIndex);
+        loadNameDates(planIndex);        
+        displayDateBlocks(tempVacationDataArray[planIndex][0].name);
 
-    });     
+        });
+
+    // Remove selection on click of button        
+    $("#modal-selection").on("click", ".modal-selection-remove-btn", function(){  
+        // get selected plan
+        selectedPlan = $("#trip-plan :selected").val();
+        // identify planIndex
+        planIndex = findIndex(selectedPlan);
+        console.log("planIndex from click on Remove plan button " + planIndex);
+        // remove entry for planIndex from the array
+        tempVacationDataArray.splice(planIndex,1);
+        saveData();
+        }); 
 };
 
 var saveData = function(){ // saves the id num and inner text to the local storage
@@ -208,35 +232,39 @@ var saveData = function(){ // saves the id num and inner text to the local stora
     return;
 };
   
-var loadData = function(){ // loads data from the local storage into our array
+var loadData = function(){ 
+    // if it exists, load data from the local storage into our temp array
     if (localStorage.getItem("vacation")) {
         tempVacationDataArray = JSON.parse(localStorage.getItem("vacation"));
-        // check to see if more than one vacation plan
-        console.log ("tempVacationDataArray.length  " + tempVacationDataArray.length);
-        if (tempVacationDataArray.length >= 1) {
-            var planListArray = [];
-            // find and list all vacation names
-            for (i=0; i < tempVacationDataArray.length; i++) {
-                // Just getting the name from the first entry 
-                planListArray.push(tempVacationDataArray[i][0].name);
-            }
-        }
-        console.log("List of plans " + planListArray);
+        // Must check first to see if planIndex has been passed in search string and give that priority
+        if (window.location.search) {
+            var searchStr = window.location.search.slice(1,window.location.search.length).split("&");
+            // get the changeIndex
+            changeIndex = searchStr[0];
+            // get the planIndex
+            planIndex = searchStr[1];
+            console.log("planIndex passed in search string " + planIndex)
+            loadNameDates(planIndex);        
+            displayDateBlocks(tempVacationDataArray[planIndex][0].name);
 
-        // display list of plans and accept a selection - call function getPlanSelection - Will redirect execution to loadNameDates and displayDateBlocks
-        getPlanSelection(planListArray);
-        
+        } else {
+            // display list of plans and accept a selection - call function getPlanSelection - Will redirect execution to loadNameDates and displayDateBlocks
+            getPlanSelection();
+        }
+
     } else {
         startUpMessage();
         startUp();
-    }
-    
+    }  
 };
 
 var loadNameDates = function(index){
+    console.log(index + " passed to loadNameDates");
+    console.log(tempVacationDataArray);
     $("#adventure-name").val(tempVacationDataArray[index][0].name);
     $("#start-date").val(tempVacationDataArray[index][0].date);
     $("#end-date").val(tempVacationDataArray[index][tempVacationDataArray[index].length-1].date);
-}
+};
+
 // Load array from localStorage before all other actions
-loadData()
+loadData();
