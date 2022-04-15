@@ -36,7 +36,7 @@ var displayDateBlocks = function(name) {
         // Row 1 content
         var dateContentEl  = $("<p>").addClass("day-date column").text(tempVacationDataArray[planIndex][i].date);
         var activityContentEl = $("<p>").addClass("day-activity column is-three-fifths").text(tempVacationDataArray[planIndex][i].activity);
-        var editButtonEl = $("<button>").addClass("js-modal-trigger button is-success is-outlined column is-one-fifth mr-4 mt-4 edit-btn").attr("data-target","modal-edit").text("Edit").attr("data-index", i);
+        var editButtonEl = $("<button>").addClass("js-modal-trigger button column is-one-fifth mr-4 mt-4 edit-btn").attr("data-target","modal-edit").text("Edit").attr("data-index", i);
         rowOneContentEl.append(dateContentEl, activityContentEl, editButtonEl);
 
         // Row 2 columns
@@ -44,7 +44,7 @@ var displayDateBlocks = function(name) {
         var tempColumnEl = $("<div>").addClass("temp-column column");
         var sunColumnEl = $("<div>").addClass("sun-column column");
         // var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 map-btn").html("<img src='./assets/images/map.svg' width='50'>");
-        var mapButtonEl = $("<button>").addClass("button is-primary is-outlined  column is-one-fifth mb-4 mr-4 mt-4 map-btn").text("Map").attr("data-index", i).attr("data-plan", planIndex);
+        var mapButtonEl = $("<button>").addClass("button column is-one-fifth mb-4 mr-4 mt-4 map-btn").text("Map").attr("data-index", i).attr("data-plan", planIndex);
         rowTwoContentEl.append(weatherColumnEl, tempColumnEl, sunColumnEl, mapButtonEl);
 
         // If we don't have a valid location and therefore valid weather data, the we can't display blank and null data
