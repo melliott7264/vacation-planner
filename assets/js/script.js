@@ -81,6 +81,7 @@ var startUp = function () {
                     saveData();
                     displayDateBlocks($("#adventure-name").val());
                 } else {
+                    displayErrorMessage("A trip by that name already exists.  Please select another name.");
                     displayDateBlocks($("#adventure-name").val());
                 }
              
