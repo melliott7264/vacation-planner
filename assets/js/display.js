@@ -3,8 +3,6 @@ var displayDateBlocks = function(name) {
     // find the index of the plan to display
     planIndex = findIndex(name);
 
-    console.log("planIndex from displayDateBlocks " + planIndex);
-
     // define overall container that holds temporary content
    var datesContainerEl = $("#dates-container")
 
@@ -107,11 +105,17 @@ var displayPlanSelection = function(planList) {
     var tripPlanSelectEl = $("<select>").attr("name", "plan").attr("id", "trip-plan");
     tripPlanDivEl.append(tripPlanSelectEl);
 
-    // for loop to loop through planList and build list of options in modal
-    for (i=0; i < planList.length; i++) { 
-        var tripPlanOptionEl = $("<option>").val(planList[i]).text(planList[i]);
-        tripPlanSelectEl.append(tripPlanOptionEl)
+    if (planList) {
+        // for loop to loop through planList and build list of options in modal
+        for (i=0; i < planList.length; i++) { 
+            var tripPlanOptionEl = $("<option>").val(planList[i]).text(planList[i]);
+            tripPlanSelectEl.append(tripPlanOptionEl)
+        }  
+    } else {
+        var tripPlanOptionEl = $("<option>").val(tempVacationDataArray[0][0].name).text(tempVacationDataArray[0][0].name);
+            tripPlanSelectEl.append(tripPlanOptionEl)
     }
+   
 
     return;
 };
@@ -135,11 +139,15 @@ $("#dates-container").on("click", ".js-modal-trigger", function(){
 $("#save-changes").on("click", function(){
     var activity =$("#modalTaskDescription").val();
     var loc =$("#modalLocationDescription").val();
-    tempVacationDataArray[planIndex][changeIndex].loc = loc;
-    tempVacationDataArray[planIndex][changeIndex].activity = activity;
-    fetchLocationData(tempVacationDataArray[planIndex][changeIndex].name,loc,tempVacationDataArray[planIndex][changeIndex].date,changeIndex);
-    $("#modalTaskDescription").val("");
-    $("#modalLocationDescription").val("");
+    if ( activity ===  "" || loc === ""){
+        displayErrorMessage("You must enter and activity and location");
+    } else {
+        tempVacationDataArray[planIndex][changeIndex].loc = loc;
+        tempVacationDataArray[planIndex][changeIndex].activity = activity;
+        fetchLocationData(tempVacationDataArray[planIndex][changeIndex].name,loc,tempVacationDataArray[planIndex][changeIndex].date,changeIndex);
+        $("#modalTaskDescription").val("");
+        $("#modalLocationDescription").val("");
+    }
 });
 
 // add event listener for map button
