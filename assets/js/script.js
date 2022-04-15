@@ -25,7 +25,7 @@ var startUp = function () {
         minDate: 0
     });
 
-    $("#name-date-submit").on("click",function(){ // function is run when the name-date-submit button is pressed
+    $("#name-date-submit").off().on("click",function(){ // function is run when the name-date-submit button is pressed
         var today = dayjs();
         var endVal = dayjs($("#end-date").val()); // gets a value from the end date box
         var startVal = dayjs($("#start-date").val());
@@ -46,9 +46,11 @@ var startUp = function () {
                 displayErrorMessage("Please keep the Adventure dates within one week from today, so that a proper weather forecast can be made.")
             }
             else{  // if no other name exists in the array create a new entry in the array for a trip plan 
-                planIndex = findIndex($("#adventure-name").val())
-                console.log("planIndex  " + planIndex);
-                if (!planIndex){
+                  
+                planIndex = findIndex($("#adventure-name").val());
+
+                if (planIndex === false){
+
                     // if array is not empty then set currentIndex to tempVacationDataArray.length
                     if (tempVacationDataArray[0].length > 0) {
                         currentIndex = tempVacationDataArray.length;
@@ -56,7 +58,6 @@ var startUp = function () {
                     } else {
                         currentIndex = 0;
                     }
-                    console.log("currentIndex " + currentIndex);
                     for (i = 0; i < dateDifference+1; i++) { //the +1 is to allow the loop to count the current day as well
                         var currentDate = dayjs($("#start-date").val()).add(i,'day').toDate() //grabs the start date and add iteration number of days to it
                         tempVacationDateObj = { //this makes all of the objects for the array, and sets some values too
@@ -76,8 +77,7 @@ var startUp = function () {
                         };
                 
                         tempVacationDataArray[currentIndex].push(tempVacationDateObj);
-    
-                        console.log(tempVacationDataArray);
+
                         // initiate fetch of weather data for a given location and date - also passing the vacation name for saving the information to an array, then local storage  
                     }
                     saveData();
@@ -193,7 +193,6 @@ var getPlanSelection = function  () {
             planListArray.push(tempVacationDataArray[i][0].name);
         }
     }
-    console.log("List of plans " + planListArray);
 
     // call function to display modal with drop-down menu generated from planList
     displayPlanSelection(planListArray);
@@ -201,21 +200,21 @@ var getPlanSelection = function  () {
 
     // get selection on click of selection button - listen on div #plan-selection for modal-selection-btn
     $("#modal-selection").on("click", ".modal-selection-btn", function(){
+        console.log("clicked on plan selection");
         // get selected plan
         selectedPlan = $("#trip-plan :selected").val();
         // close modal
         $("#modal-selection").removeClass("is-active");
-
         // get the index of the selected plan to send to loadNameDates and displayDateBlocks
         planIndex = findIndex(selectedPlan);
-        console.log("planIndex from click on Selection plan button " + planIndex);
+       
         loadNameDates(planIndex);        
         displayDateBlocks(tempVacationDataArray[planIndex][0].name);
 
         });
 
     // Remove selection on click of button        
-    $("#modal-selection").on("click", ".modal-selection-remove-btn", function(){  
+    $("#modal-selection").off().on("click", ".modal-selection-remove-btn", function(){  
         // get selected plan
         selectedPlan = $("#trip-plan :selected").val();
         // identify planIndex
@@ -227,8 +226,7 @@ var getPlanSelection = function  () {
             // remove entry for planIndex from the array
             tempVacationDataArray.splice(planIndex,1);
             saveData();
-        }
-        
+        } 
         
         }); 
 };

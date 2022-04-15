@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const $target = $close.closest('.modal');
     
     $close.addEventListener('click', () => {
-
+ 
       closeModal($target);
     });
   });

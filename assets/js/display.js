@@ -3,8 +3,6 @@ var displayDateBlocks = function(name) {
     // find the index of the plan to display
     planIndex = findIndex(name);
 
-    console.log("planIndex from displayDateBlocks " + planIndex);
-
     // define overall container that holds temporary content
    var datesContainerEl = $("#dates-container")
 
