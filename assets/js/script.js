@@ -220,10 +220,16 @@ var getPlanSelection = function  () {
         selectedPlan = $("#trip-plan :selected").val();
         // identify planIndex
         planIndex = findIndex(selectedPlan);
-        console.log("planIndex from click on Remove plan button " + planIndex);
-        // remove entry for planIndex from the array
-        tempVacationDataArray.splice(planIndex,1);
-        saveData();
+        // check if last trip in array.  If so,  must delete file vacation file
+        if (tempVacationDataArray.length <= 1){
+            localStorage.removeItem("vacation");
+        } else {
+            // remove entry for planIndex from the array
+            tempVacationDataArray.splice(planIndex,1);
+            saveData();
+        }
+        
+        
         }); 
 };
 
@@ -243,7 +249,6 @@ var loadData = function(){
             changeIndex = searchStr[0];
             // get the planIndex
             planIndex = searchStr[1];
-            console.log("planIndex passed in search string " + planIndex)
             loadNameDates(planIndex);        
             displayDateBlocks(tempVacationDataArray[planIndex][0].name);
 
@@ -259,8 +264,6 @@ var loadData = function(){
 };
 
 var loadNameDates = function(index){
-    console.log(index + " passed to loadNameDates");
-    console.log(tempVacationDataArray);
     $("#adventure-name").val(tempVacationDataArray[index][0].name);
     $("#start-date").val(tempVacationDataArray[index][0].date);
     $("#end-date").val(tempVacationDataArray[index][tempVacationDataArray[index].length-1].date);
