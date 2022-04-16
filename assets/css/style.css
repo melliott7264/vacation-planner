@@ -7,6 +7,11 @@
     --bg-color-pewter: #F1E7E4;
 }
 
+.trip-selector-btn {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
 .bg-ivory {
     background-color: var(--bg-color-ivory);
 }
@@ -24,7 +29,21 @@
     margin: 10px;
 }
 
+.js-modal-trigger, .map-btn, .button, #back-btn {
+    border: 3px solid #00c4a7;
+    border-radius: 10px;
+    font-weight: 700;
+    color: black;
+    background-color: transparent;
+    box-shadow: 3px 3px 2px black;
+    } 
+
+.button.is-success {
+    color: black;
+}
+
 .name-submit-btn {
+    font-size: 1rem;
     font-weight: 700;
 }
 
@@ -74,6 +93,23 @@
 }
 
 @media screen and (min-width: 1200px) {
+
+    * {
+        font-size: 18px;
+    }
+
+    .trip-selector-btn, .name-submit-btn {
+        font-size: 1.25rem;
+    }
+
+    .js-modal-trigger, .map-btn, .button, #back-btn {
+       font-size: 1.25rem;
+        } 
+
+    .modal-card-title {
+        font-size: 1.75rem;
+    }
+
     .subtitle, .subtitle-map {
         font-size: 2rem;
     }

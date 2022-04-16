@@ -28,11 +28,15 @@ Application may be run from here: https://melliott7264.github.io/vacation-planne
 
 When you first load the applicaton, you will see the following Startup/Welcome screen.  Click on the Start button to get started setting up your adventure.
 
-![Startup/welcome screenshot](./assets/images/ScreenSho2.png)
+  ![Startup/welcome screenshot](./assets/images/ScreenShot2.png)
+
 
 On this screen,  you will type in a name for your adventure as well as a start date and an end date.   Clicking on the date field will result in a pop-up calendar to assist you in picking your dates.   As our weather forcast data is limited to a week out, you can't pick an ending date more than 7 days out from the current date.   When you have typed in a name and selected and start and end date, click on the Submit Name/Dates button.
 
-![Screenshot of adventure name and dates entry fields](./assets/images/ScreenShot3.png)
+  ![Screenshot of adventure name and dates entry fields](./assets/images/ScreenShot3.png)
+ 
+  ![Screenshot with filled day/location entries](./assets/images/ScreenShot35.png)
+
 
 Next,  you will be presented with a screen of blank dates for your upcoming adventure.  You must enter an activity and a location for each date.   Do this by clicking on the Edit button.
 
@@ -50,7 +54,11 @@ Once you are on the Map screen, you can zoom in and zoom out on the map and drag
 
 ![Screenshot with filled day/location entries](./assets/images/ScreenShot6.png)
 
-Right now, you can only have one plan at a time.   If you summit a new name and or dates, you will overwrite your previous plan.  We intend to add the option to have and manage multiple plans in future releases.
+If you would like to create a second or third trip plan or more, you can do that.  Just type the new trip name into the name field, select new dates (if you desire) and click on the Submit Names/Dates button again.  This will add the new trip.   To select and view  your trip, click on the Trip Selector button.  That will present you with the screen shown below.
+
+![Screenshot with filled day/location entries](./assets/images/ScreenShot7.png)
+
+On the screen above, click on the drop down menu and select the trip you wish to view.  Then just click on the Select button.   If you want to delete the selected trip, click on the Remove button.  
 
 ![Screenshot with filled day/location entries](./assets/images/ScreenShot1.png)
 
@@ -58,7 +66,9 @@ Right now, you can only have one plan at a time.   If you summit a new name and 
 
 ## Credits
 
-Developers:
+Repository for application code: https://github.com/melliott7264/vacation-planner
+
+Developers:   
 
 Thomas Ciszek  https://github.com/ThomasCsk
 
