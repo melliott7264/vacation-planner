@@ -25,7 +25,7 @@ var startUp = function () {
         minDate: 0
     });
 
-    $("#name-date-submit").one("click",function(){ // function is run when the name-date-submit button is pressed
+    $("#name-date-submit").off("click").on("click",function(){ // function is run when the name-date-submit button is pressed
         var today = dayjs();
         var endVal = dayjs($("#end-date").val()); // gets a value from the end date box
         var startVal = dayjs($("#start-date").val());
@@ -222,7 +222,7 @@ var getTripSelector = function (planListArray) {
         });
 
     // Remove selection on click of button        
-    $("#modal-selection").one("click", ".modal-selection-remove-btn", function(){  
+    $("#modal-selection").off("click", ".modal-selection-remove-btn").on("click", ".modal-selection-remove-btn", function(){  
         // get selected plan
         selectedPlan = $("#trip-plan :selected").val();
         // identify planIndex
